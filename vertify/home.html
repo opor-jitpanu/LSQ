@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+
+	<div class="container">
+
+
+		<br><br>
+		<div class="form-group">
+			<label for="exampleInputEmail1">ID : </label>
+			<input type="text" class="form-control" id="idInput">
+		</div>
+		<button type="submit" onclick="enterId()" class="btn btn-primary">Submit</button>
+
+		<br><br>
+
+
+		<div class="input-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+			</div>
+			<div class="custom-file">
+				<input type="file" class="custom-file-input" id="inputFile"
+				aria-describedby="inputGroupFileAddon01">
+				<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+			</div>
+		</div>
+		<br>
+		<button type="submit" onclick="enterFile()" class="btn btn-primary">Submit</button>
+		
+
+	</div>
+
+
+
+	<div class="row">
+		<div class="col-md-12">
+
+			<div id="mdb-lightbox-ui"></div>
+
+			<div class="mdb-lightbox" id="imageGallary">
+
+				
+
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+
+
+</body>
+
+<script>
+
+
+	window.onload = function() {
+		sessionStorage.clear();
+
+
+		var i;
+		for (i = 1; i < 11; i++) {
+			var name = '';
+			if (i.toString().length == '1') {
+				name  = "img_0000" + i.toString();
+			}else if (i.toString().length == '2') {
+				name  = "img_000" + i.toString();
+			}else if (i.toString().length == '3') {
+				name  = "img_00" + i.toString();
+			}else if (i.toString().length == '4') {
+				name  = "img_0" + i.toString();
+			}else{
+				name = 'img_'+i.toString();
+			}
+
+			var storageRef = firebase.storage().ref("images");
+			storageRef.child(name+".jpg").getDownloadURL().then(function(url) {
+
+				var div = document.getElementById('imageGallary');
+				div.innerHTML += '<figure class="col-md-4"><img alt="picture" src="'+url+'" class="img-fluid" /></figure><p>'+name+'</p>';
+			}).catch(function(error) {
+
+			});
+
+		}
+
+
+	};
+
+	function enterId() {
+		var id_input = document.getElementById('idInput').value;
+		sessionStorage.clear();
+		sessionStorage.setItem("idInput", id_input);
+
+		console.log(sessionStorage.getItem("idInput"));
+		window.location.href = "index.html";
+	}
+
+
+	function enterFile() {
+
+		var file = document.getElementById('inputFile').files[0];
+		var storageRef = firebase.storage().ref();
+
+		var isValid = /\.jpe?g$/i.test(file.name);
+		if (!isValid) {
+			alert('Only jpg files allowed!');
+		}else{
+			var uploadTask = storageRef.child("a.jpg").put(file);
+			uploadTask.on('state_changed', function(snapshot){
+				var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				console.log('Upload is ' + progress);
+				switch (snapshot.state) {
+					case firebase.storage.TaskState.PAUSED: 
+					console.log('Upload is paused');
+					break;
+					case firebase.storage.TaskState.RUNNING: 
+					console.log('Upload is running');
+					break;
+				}
+			}, function(error) {
+				console.log(error);
+			}, function() {
+
+				console.log("Complete")
+			});
+
+		}
+		
+	}
+</script>
+
+
+
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+<script>
+	var firebaseConfig = {
+		apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+		authDomain: "labeljpn.firebaseapp.com",
+		databaseURL: "https://labeljpn.firebaseio.com",
+		projectId: "labeljpn",
+		storageBucket: "labeljpn.appspot.com",
+		messagingSenderId: "478979409533",
+		appId: "1:478979409533:web:a286086924054873c6d314",
+		measurementId: "G-74RV1SGSWC"
+	};
+	firebase.initializeApp(firebaseConfig);
+</script>
+
+
+
+
+</html>

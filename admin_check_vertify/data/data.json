@@ -1,0 +1,19 @@
+{
+  "labels": [
+    "background",
+    "fat",
+    "meat",
+    "bone",
+    "other meat",
+    "spinal cord space"
+  ],
+  "imageURLs": [
+    "data/images/img_00005.jpg",
+    "data/images/img_00006.jpg"
+    
+  ],
+  "annotationURLs": [
+    "data/annotations/img_00005.png",
+    "data/annotations/img_00006.png"
+  ]
+}

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+
+
+	<title>Crop Page</title>
+
+	<style type="text/css">
+		.card{
+			float: left;
+			width: 180px;
+			margin: 5px;
+		}
+
+
+
+
+	</style>
+
+
+	<style type="text/css">
+		.inlineBTN{
+			display: inline-block;
+		}
+		.sideRight{
+			float:right;
+		}
+		.sideLeft{
+			float:left;
+		}
+		img {
+			display: block;
+
+			/* This rule is very important, please don't ignore this */
+			max-width: 100%;
+		}
+
+		#canvas {
+			height: 600px;
+			width: 600px;
+			background-color: #ffffff;
+			cursor: default;
+			border: 1px solid black;
+		}
+
+		#canvas2{
+			width: 100%;
+			/*width: 500px;*/
+		}
+
+
+		.modal {
+			padding: 18px;
+			position: absolute;
+			border: 1px solid lightgrey;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 300px;
+		}
+
+		.modal img {
+			max-width: 100%;
+		}
+
+	</style>
+
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+	<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+	<link src="cropper/croppr.css" rel="stylesheet"/>
+	<script src="cropper/croppr.js"></script>
+
+
+	<script src="dist/croppr.js"></script>
+	<link rel="stylesheet" href="dist/croppr.css">
+
+
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/xlsx.full.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/jszip.js"></script>
+
+</head>
+
+<body id="page-top">
+
+	<div id="wrapper">
+
+		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+			<br>
+			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+				<div class="sidebar-brand-text mx-3"> <p id="user_name"></p> </div>
+			</a>
+
+			<hr class="sidebar-divider my-0">
+			<li class="nav-item">
+				<a class="nav-link" href="admin.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span>Admin</span></a>
+				</li>
+
+
+
+				<li class="nav-item">
+					<a class="nav-link" href="add_image.html">
+						<i class="fas fa-fw fa-tachometer-alt"></i>
+						<span>Upload Image</span></a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="admin_image.html">
+							<i class="fas fa-fw fa-tachometer-alt"></i>
+							<span>Image Information</span></a>
+						</li>
+
+
+						<li class="nav-item active">
+							<a class="nav-link" href="crop.html">
+								<i class="fas fa-fw fa-tachometer-alt"></i>
+								<span>Crop</span></a>
+							</li>
+
+
+							
+							<li class="nav-item">
+								<a class="nav-link" href="reference.html">
+									<i class="fas fa-fw fa-tachometer-alt"></i>
+									<span>Reference</span></a>
+								</li>
+
+								<hr class="sidebar-divider my-0">
+								<li class="nav-item">
+									<a class="nav-link" href="logout.html">
+										<i class="fas fa-fw fa-tachometer-alt"></i>
+										<span>Logout</span></a>
+									</li>
+
+
+									<hr class="sidebar-divider my-0">
+									<br>
+
+									<div class="text-center d-none d-md-inline">
+										<button class="rounded-circle border-0" id="sidebarToggle"></button>
+									</div>
+								</ul>
+
+								<div id="content-wrapper" class="d-flex flex-column">
+									<div id="content">
+										<div class="container-fluid">
+											<br>
+											<h1 class="h3 mb-4 text-gray-800">Crop Page  |  Select image</h1>
+
+											<p id="remain_text"></p>
+
+											
+											
+											<!-- <input type="file" id="fileUpload" /> -->
+											<!-- <input type="button" id="upload" value="Upload" onclick="UploadProcess()" /> -->
+											<br/>
+
+											<div id="imageGallary1">
+											</div>
+
+											<div id="imageGallary2">
+											</div>
+
+
+
+
+
+
+										</div>
+									</div>
+									<footer class="sticky-footer bg-white">
+										<div class="container my-auto">
+											<div class="copyright text-center my-auto">
+												<span>Copyright &copy; Jitpanu Tanthong</span>
+											</div>
+										</div>
+									</footer>
+
+								</div>
+
+							</div>
+
+						</body>
+
+						<script type="text/javascript">
+							window.onload = function() {
+
+								
+								var username = sessionStorage.getItem("username");
+								document.getElementById("user_name").innerHTML = "Hi, "+sessionStorage.getItem("username");
+
+								const queryString = window.location.search;
+								const urlParams = new URLSearchParams(queryString);
+
+								const username2 = urlParams.get('username')
+
+								if (!username) {
+									var username = urlParams.get('username');
+									document.getElementById("user_name").innerHTML = "Hi, "+username;
+									sessionStorage.setItem("username", username);
+								}
+
+								//DIV รูปภาพที่Cropแล้วกับยังไม่ได้Crop
+								var div_new = document.getElementById('imageGallary1');
+								var div_old = document.getElementById('imageGallary2');
+
+
+								// ดึงชื่อรูปภาพมาจากดาต้าเบส แล้วให้แสดงรูปภาพที่อยู่ในโฟลเดอร์ image
+								var leadsRef = firebase.database().ref('precrop');
+								leadsRef.once("value",snapshot => {
+									if (snapshot.exists()){
+										const userData = snapshot.val();
+										var img = Object.keys(userData);
+
+										for (var i = 0; i < img.length; i++) {
+
+											
+											
+											var ref2 = firebase.database().ref('precrop/'+img[i]);
+											ref2.on("value", function(snapshot) {
+												var data = snapshot.val();
+												const id = snapshot.key;
+												console.log(id);
+												console.log(data.crop);
+
+
+												// ถ้ายังไม่ได้ Crop ให้แสดงรูปภาพ
+												if (data.crop == "no") {
+								
+													div_new.innerHTML +=  '<div style="opacity:1;" class="card shadow mb-4"><div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary">'+id+'<a target="_blank" href="crop_process.html?image='+id+'&username='+username+'">'+'</h6></div><div class="card-body"> <img src="'+"image/"+id+'.jpg" alt="Cinque Terre" width="100%" ></a>'+'</div>'+'</a></div></div>';
+												}
+												else{
+													
+
+												}
+												
+
+											});
+
+
+
+										}
+
+
+									}
+								});
+
+
+
+							}
+
+
+
+							// ไม่เกี่ยวกับระบบครับ
+							function UploadProcess() {
+
+								var fileUpload = document.getElementById("fileUpload");
+
+
+								var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
+								if (regex.test(fileUpload.value.toLowerCase())) {
+									if (typeof (FileReader) != "undefined") {
+										var reader = new FileReader();
+
+
+										if (reader.readAsBinaryString) {
+											reader.onload = function (e) {
+												GetTableFromExcel(e.target.result);
+											};
+											reader.readAsBinaryString(fileUpload.files[0]);
+										} else {
+
+											reader.onload = function (e) {
+												var data = "";
+												var bytes = new Uint8Array(e.target.result);
+												for (var i = 0; i < bytes.byteLength; i++) {
+													data += String.fromCharCode(bytes[i]);
+												}
+												GetTableFromExcel(data);
+											};
+											reader.readAsArrayBuffer(fileUpload.files[0]);
+										}
+									} else {
+										alert("This browser does not support HTML5.");
+									}
+								} else {
+									alert("Please upload a valid Excel file.");
+								}
+							};
+							function GetTableFromExcel(data) {
+
+
+								var workbook = XLSX.read(data, {
+									type: 'binary'
+								});
+
+
+								var Sheet = workbook.SheetNames[0];
+
+
+								var excelRows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[Sheet]);
+
+								var div_new = document.getElementById('imageGallary1');
+								var div_old = document.getElementById('imageGallary2');
+								var username = sessionStorage.getItem("username");
+
+
+
+								for (var i = 0; i < excelRows.length; i++) {
+									console.log(excelRows[i].Image);
+									console.log(excelRows[i].Crop);
+
+
+									if (excelRows[i].Crop == "no") {
+										div_new.innerHTML +=  '<div style="opacity:1;" class="card shadow mb-4"><div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary">'+excelRows[i].Image+'<a target="_blank" href="crop_process.html?image='+excelRows[i].Image+'&username='+username+'">'+'</h6></div><div class="card-body"> <img src="'+"image/"+excelRows[i].Image+'.jpg" alt="Cinque Terre" width="100%" ></a>'+'</div>'+'</a></div></div>';
+									}
+									else{
+										div_old.innerHTML +=  '<div style="opacity:0.3;" class="card shadow mb-4"><div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary">'+excelRows[i].Image+'<a target="_blank" href="#">'+'</h6></div><div class="card-body"> <img src="'+"image/"+excelRows[i].Image+'.jpg" alt="Cinque Terre" width="100%" ></a>'+'</div>'+'</a></div></div>';
+
+									}
+
+
+
+
+								}
+
+
+							};
+
+
+
+
+
+
+						</script>
+
+						<!-- Bootstrap core JavaScript-->
+						<script src="vendor/jquery/jquery.min.js"></script>
+						<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+						<!-- Core plugin JavaScript-->
+						<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+						<!-- Custom scripts for all pages-->
+						<script src="js/sb-admin-2.min.js"></script>
+
+						<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+						<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+						<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+						<script>
+							var firebaseConfig = {
+								apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+								authDomain: "labeljpn.firebaseapp.com",
+								databaseURL: "https://labeljpn.firebaseio.com",
+								projectId: "labeljpn",
+								storageBucket: "labeljpn.appspot.com",
+								messagingSenderId: "478979409533",
+								appId: "1:478979409533:web:a286086924054873c6d314",
+								measurementId: "G-74RV1SGSWC"
+							};
+							firebase.initializeApp(firebaseConfig);
+						</script>
+
+
+
+						</html>

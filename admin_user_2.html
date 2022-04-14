@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+  <div class="">
+            <table class="table table-bordered" id="segmentTable" class="display" style="width:100%" cellspacing="0">
+             <thead>
+              <tr>
+               <th>Segment Image</th>
+               <th>Time</th>
+               <th>Status</th>
+             </tr>
+           </thead>
+           <tbody>
+           </tbody>
+         </table>
+       </div>
+
+</body>
+
+<script type="text/javascript">
+  window.onload = function() {
+
+
+   $(document).ready(function() {
+    $('#segmentTable').DataTable();
+  });
+
+
+
+   const queryString = window.location.search;
+   const urlParams = new URLSearchParams(queryString);
+   const user = urlParams.get('user');
+
+
+   var t1 = $('#segmentTable').DataTable();
+   
+
+
+
+   var ref = firebase.database().ref('user/'+user+'/annotation/');
+   ref.on('child_added', function(snapshot) { 
+    var data = snapshot.val();
+    var key1 = snapshot.key;
+    t1.row.add( [
+     key1,
+     data.time,
+     data.redeem
+     ] ).draw( false );
+  });
+
+
+
+   
+
+ };
+
+
+
+
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+<script>
+  var firebaseConfig = {
+   apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+   authDomain: "labeljpn.firebaseapp.com",
+   databaseURL: "https://labeljpn.firebaseio.com",
+   projectId: "labeljpn",
+   storageBucket: "labeljpn.appspot.com",
+   messagingSenderId: "478979409533",
+   appId: "1:478979409533:web:a286086924054873c6d314",
+   measurementId: "G-74RV1SGSWC"
+ };
+ firebase.initializeApp(firebaseConfig);
+</script>
+</html>

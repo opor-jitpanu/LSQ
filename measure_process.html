@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Measure Page</title>
+
+	<style type="text/css">
+		.card{
+			float: left;
+			width: 180px;
+			margin: 5px;
+		}
+
+
+	</style>
+
+
+	<style type="text/css">
+		.inlineBTN{
+			display: inline-block;
+		}
+		.sideRight{
+			float:right;
+		}
+		.sideLeft{
+			float:left;
+		}
+		* {
+			margin: 0;
+			padding: 0;
+			/*cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>✍️</text></svg>") 16 0,auto;*/
+		}
+		/*canvas {
+			width: 450px;
+			height: 600px;
+			}*/
+
+			/*body{ background-color: ivory; }*/
+			#canvas{border:1px solid red;}
+
+
+
+			#text_red{
+				color: red;
+			}
+			#text_blue{
+				color: blue;
+			}
+			#text_green{
+				color: green;
+			}
+
+		</style>
+
+		<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+		<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+		<script src="https://unpkg.com/konva@7.0.3/konva.min.js"></script>
+
+
+	</head>
+
+	<body id="page-top">
+
+		<div id="wrapper">
+
+			<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+				<br>
+				<a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+					<div class="sidebar-brand-text mx-3"> <p id="user_name"></p> </div>
+				</a>
+
+				<hr class="sidebar-divider my-0">
+				<li class="nav-item">
+					<a class="nav-link" href="label.html">
+						<i class="fas fa-fw fa-tachometer-alt"></i>
+						<span>Segmentation</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="vertify.html">
+							<i class="fas fa-fw fa-tachometer-alt"></i>
+							<span>Verify</span></a>
+						</li>
+
+						<hr class="sidebar-divider my-0">
+
+						<li class="nav-item">
+							<a class="nav-link" href="userinfo2.html">
+								<i class="fas fa-fw fa-tachometer-alt"></i>
+								<span>User Information</span></a>
+							</li>
+
+
+							<li class="nav-item active">
+								<a class="nav-link" href="#">
+									<i class="fas fa-fw fa-tachometer-alt"></i>
+									<span>Measure</span></a>
+								</li>
+
+
+								<li class="nav-item">
+									<a class="nav-link" href="logout.html">
+										<i class="fas fa-fw fa-tachometer-alt"></i>
+										<span>Logout</span></a>
+									</li>
+
+
+									<hr class="sidebar-divider my-0">
+									<br>
+
+									<div class="text-center d-none d-md-inline">
+										<button class="rounded-circle border-0" id="sidebarToggle"></button>
+									</div>
+								</ul>
+
+								<div id="content-wrapper" class="d-flex flex-column">
+									<div id="content">
+										<div class="container-fluid">
+											<br>
+											<h1 class="h3 mb-4 text-gray-800">Measure Page</h1>
+
+											<div class="col-lg-6">
+												<div class="input-group">
+												</div>
+											</div>
+
+											<p id="image_name"></p>
+
+											<h4 id="text_red"> - BF3 : RED - ระยะห่างระหว่างฐานสามเหลี่ยมของเนื้อแดงลากตั้งฉากกับส่วนไขมัน</h4>
+											<h4 id="text_blue"> - BF4 : BLUE - ส่วนที่บางที่สุดของส่วนไขมัน</h4>
+											<h4 id="text_green"> - b : GREEN - ระยะห่างระหว่างฐานสามเหลี่ยมของเนื้อแดงลากตั้งฉากกับช่องไขสันหลัง</h4>
+
+											
+
+											
+											<br>
+
+											<div id="buttons">
+												
+												<input type="button" id="getData" value="Submit" class="btn btn-primary" />
+												
+											</div>
+											<br>
+											<div id="container"></div>
+
+
+
+											<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLabel">Summary</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+
+															<h5 id="text_bf3_lenght">BF3 : </h5>
+															<h5 id="text_bf4_lenght">BF4 : </h5>
+															<h5 id="text_b_lenght">b : </h5>
+															<h5 id="text_lsq">LSQ : </h5>
+															<button type="button" onclick="addDatabase()" class="btn btn-primary">Submit</button>
+
+														</div>
+
+													</div>
+												</div>
+											</div>
+
+
+
+										</div>
+									</div>
+									<footer class="sticky-footer bg-white">
+										<div class="container my-auto">
+											<div class="copyright text-center my-auto">
+												<span>Copyright &copy; Jitpanu Tanthong</span>
+											</div>
+										</div>
+									</footer>
+
+								</div>
+
+							</div>
+
+						</body>
+
+						<script type="text/javascript">
+
+							var line = [];
+							var bf3 = [0,0,0,0];
+							var bf4 = [0,0,0,0];
+							var b = [0,0,0,0];
+
+							var bf3_lenght = 0;
+							var bf4_lenght = 0;
+							var b_lenght = 0;
+							var lsq = 0;
+
+							var bf3_1 = 0;
+							var bf3_2 = 0;
+							var bf4_1 = 0;
+							var bf4_2 = 0;
+							var b_1 = 0;
+							var b_2 = 0;
+
+
+
+							var shapes=[];
+
+
+							window.onload = function() {
+
+								const queryString = window.location.search;
+								const urlParams = new URLSearchParams(queryString);
+								const image = urlParams.get('image');
+								const username = urlParams.get('username');
+
+								var width = window.innerWidth;
+								var height = window.innerHeight;
+
+								var stage = new Konva.Stage({
+									container: 'container',
+									width: 450,
+									height: 600,
+								});
+
+
+								var layer = new Konva.Layer();
+								stage.add(layer);
+
+
+								var imageObj = new Image();
+								imageObj.onload = function () {
+									var yoda = new Konva.Image({
+										x: 0,
+										y: 0,
+										image: imageObj,
+										width: 450,
+										height: 600,
+									});
+
+									layer.add(yoda);
+
+
+									var ref2 = firebase.database().ref('measure/'+image+"/"+username);
+									ref2.on("value", function(snapshot) {
+										var data = snapshot.val();
+										var process_1 = snapshot.child("process").val();
+										if (process_1 == 'yes') {
+
+											const line = new Konva.Line({
+												points: [data.bf3_start_x, data.bf3_start_y, data.bf3_stop_x, data.bf3_stop_y],
+												stroke: 'red'
+											});
+											layer.add(line);
+
+
+											const anchor1 = new Konva.Circle({
+												x: line.points()[0],
+												y: line.points()[1],
+												radius: 7,
+												fill: 'red',
+												id: 'bf3_1',
+												opacity: 0.6,
+												draggable: true
+											})
+											layer.add(anchor1);
+
+											const anchor2 = new Konva.Circle({
+												x: line.points()[2],
+												y: line.points()[3],
+												radius: 7,
+												fill: 'red',
+												id: 'bf3_2',
+												opacity: 0.6,
+												draggable: true
+
+											})
+											layer.add(anchor2);
+
+
+											function updateLine() {
+												const points = [
+												anchor1.x(),
+												anchor1.y(),
+												anchor2.x(),
+												anchor2.y(),
+												]
+												line.points(points);
+												layer.batchDraw();
+											}
+
+											anchor1.on('dragmove', updateLine);
+											anchor2.on('dragmove', updateLine);
+
+
+
+											const line_2 = new Konva.Line({
+												points: [data.bf4_start_x, data.bf4_start_y, data.bf4_stop_x, data.bf4_stop_y],
+												stroke: 'blue'
+											});
+											layer.add(line_2);
+
+											const anchor1_2 = new Konva.Circle({
+												x: line_2.points()[0],
+												y: line_2.points()[1],
+												radius: 7,
+												fill: 'blue',
+												id: 'bf4_1',
+												opacity: 0.6,
+												draggable: true
+											})
+											layer.add(anchor1_2);
+
+											const anchor2_2 = new Konva.Circle({
+												x: line_2.points()[2],
+												y: line_2.points()[3],
+												radius: 7,
+												fill: 'blue',
+												id: 'bf4_2',
+												opacity: 0.6,
+												draggable: true
+
+											})
+											layer.add(anchor2_2);
+
+
+											function updateLine_2() {
+												const points = [
+												anchor1_2.x(),
+												anchor1_2.y(),
+												anchor2_2.x(),
+												anchor2_2.y(),
+												]
+												line_2.points(points);
+												layer.batchDraw();
+											}
+
+											anchor1_2.on('dragmove', updateLine_2);
+											anchor2_2.on('dragmove', updateLine_2);
+
+
+
+
+
+											const line_3 = new Konva.Line({
+												points: [data.b_start_x, data.b_start_y, data.b_stop_x, data.b_stop_y],
+												stroke: 'green'
+											});
+											layer.add(line_3);
+
+											const anchor1_3 = new Konva.Circle({
+												x: line_3.points()[0],
+												y: line_3.points()[1],
+												radius: 7,
+												fill: 'green',
+												id: 'b_1',
+												opacity: 0.6,
+												draggable: true
+											})
+											layer.add(anchor1_3);
+
+											const anchor2_3 = new Konva.Circle({
+												x: line_3.points()[2],
+												y: line_3.points()[3],
+												radius: 7,
+												fill: 'green',
+												id: 'b_2',
+												opacity: 0.6,
+												draggable: true
+
+											})
+											layer.add(anchor2_3);
+
+
+											function updateLine_3() {
+												const points = [
+												anchor1_3.x(),
+												anchor1_3.y(),
+												anchor2_3.x(),
+												anchor2_3.y(),
+												]
+												line_3.points(points);
+												layer.batchDraw();
+											}
+
+											anchor1_3.on('dragmove', updateLine_3);
+											anchor2_3.on('dragmove', updateLine_3);
+
+
+
+
+											stage.add(layer);
+											layer.batchDraw();
+
+										}else{
+
+											const line = new Konva.Line({
+												points: [100, 100, 200, 100],
+												stroke: 'red'
+											});
+											layer.add(line);
+
+
+											const anchor1 = new Konva.Circle({
+												x: line.points()[0],
+												y: line.points()[1],
+												radius: 7,
+												fill: 'red',
+												id: 'bf3_1',
+												opacity: 0.6,
+												draggable: true
+											})
+											layer.add(anchor1);
+
+											const anchor2 = new Konva.Circle({
+												x: line.points()[2],
+												y: line.points()[3],
+												radius: 7,
+												fill: 'red',
+												id: 'bf3_2',
+												opacity: 0.6,
+												draggable: true
+
+											})
+											layer.add(anchor2);
+
+
+											function updateLine() {
+												const points = [
+												anchor1.x(),
+												anchor1.y(),
+												anchor2.x(),
+												anchor2.y(),
+												]
+												line.points(points);
+												layer.batchDraw();
+											}
+
+											anchor1.on('dragmove', updateLine);
+											anchor2.on('dragmove', updateLine);
+
+
+
+											const line_2 = new Konva.Line({
+												points: [100, 150, 200, 150],
+												stroke: 'blue'
+											});
+											layer.add(line_2);
+
+											const anchor1_2 = new Konva.Circle({
+												x: line_2.points()[0],
+												y: line_2.points()[1],
+												radius: 7,
+												fill: 'blue',
+												id: 'bf4_1',
+												opacity: 0.6,
+												draggable: true
+											})
+											layer.add(anchor1_2);
+
+											const anchor2_2 = new Konva.Circle({
+												x: line_2.points()[2],
+												y: line_2.points()[3],
+												radius: 7,
+												fill: 'blue',
+												id: 'bf4_2',
+												opacity: 0.6,
+												draggable: true
+
+											})
+											layer.add(anchor2_2);
+
+
+											function updateLine_2() {
+												const points = [
+												anchor1_2.x(),
+												anchor1_2.y(),
+												anchor2_2.x(),
+												anchor2_2.y(),
+												]
+												line_2.points(points);
+												layer.batchDraw();
+											}
+
+											anchor1_2.on('dragmove', updateLine_2);
+											anchor2_2.on('dragmove', updateLine_2);
+
+
+
+
+
+											const line_3 = new Konva.Line({
+												points: [100, 200, 200, 200],
+												stroke: 'green'
+											});
+											layer.add(line_3);
+
+											const anchor1_3 = new Konva.Circle({
+												x: line_3.points()[0],
+												y: line_3.points()[1],
+												radius: 7,
+												fill: 'green',
+												id: 'b_1',
+												opacity: 0.6,
+												draggable: true
+											})
+											layer.add(anchor1_3);
+
+											const anchor2_3 = new Konva.Circle({
+												x: line_3.points()[2],
+												y: line_3.points()[3],
+												radius: 7,
+												fill: 'green',
+												id: 'b_2',
+												opacity: 0.6,
+												draggable: true
+
+											})
+											layer.add(anchor2_3);
+
+
+											function updateLine_3() {
+												const points = [
+												anchor1_3.x(),
+												anchor1_3.y(),
+												anchor2_3.x(),
+												anchor2_3.y(),
+												]
+												line_3.points(points);
+												layer.batchDraw();
+											}
+
+											anchor1_3.on('dragmove', updateLine_3);
+											anchor2_3.on('dragmove', updateLine_3);
+
+
+
+
+											stage.add(layer);
+											layer.batchDraw();
+
+										}
+
+
+									});
+
+								};
+
+
+								sessionStorage.setItem("username", username);
+
+								document.getElementById("user_name").innerHTML = "Hi, "+ username;
+
+								var storageRef = firebase.storage().ref("images/");
+								storageRef.child(image+".jpg").getDownloadURL().then(function(url) {
+
+									console.log(url);
+									imageObj.src = url;
+
+								}).catch(function(error) {
+									console.log(error);
+								})
+
+
+								document.getElementById('getData').addEventListener(
+									'click',
+									function () {
+
+
+										bf3_1 = stage.find('#bf3_1')[0];
+										bf3_2 = stage.find('#bf3_2')[0];
+
+										bf4_1 = stage.find('#bf4_1')[0];
+										bf4_2 = stage.find('#bf4_2')[0];
+
+										b_1 = stage.find('#b_1')[0];
+										b_2 = stage.find('#b_2')[0];
+
+
+										calulateLSQ();
+
+
+										function calulateLSQ(){
+
+
+											bf3_lenght = Math.sqrt(((bf3_2.attrs.x-bf3_1.attrs.x)**2)+((bf3_2.attrs.y-bf3_1.attrs.y)**2));
+
+											bf4_lenght = Math.sqrt(((bf4_2.attrs.x-bf4_1.attrs.x)**2)+((bf4_2.attrs.y-bf4_1.attrs.y)**2));
+
+											b_lenght = Math.sqrt(((b_2.attrs.x-b_1.attrs.x)**2)+((b_2.attrs.y-b_1.attrs.y)**2));
+
+											lsq = ((bf3_lenght)+(bf4_lenght))/(2*b_lenght);
+
+											console.log(bf3_lenght);
+											console.log(bf4_lenght);
+											console.log(b_lenght);
+											console.log(lsq);
+
+											document.getElementById("text_bf3_lenght").innerHTML = "BF3 : " + Math.ceil(bf3_lenght) +" px.";
+											document.getElementById("text_bf4_lenght").innerHTML = "BF4 : " + Math.ceil(bf4_lenght) +" px.";
+											document.getElementById("text_b_lenght").innerHTML = "b : " + Math.ceil(b_lenght) +" px.";
+											document.getElementById("text_lsq").innerHTML = "LSQ : " + lsq;
+
+											$('#exampleModal').modal('show')
+
+
+										}
+
+
+									},
+									false
+									);
+
+
+							};
+
+
+							function addDatabase(){
+
+
+								const queryString = window.location.search;
+								const urlParams = new URLSearchParams(queryString);
+								const image = urlParams.get('image');
+								const username = urlParams.get('username');
+
+
+
+								firebase.database().ref('measure/' + image +"/"+username).set({
+									username: username,
+									process:"yes",
+									bf3_start_x:bf3_1.attrs.x,
+									bf3_start_y:bf3_1.attrs.y,
+									bf3_stop_x:bf3_2.attrs.x,
+									bf3_stop_y:bf3_2.attrs.y,
+									bf4_start_x:bf4_1.attrs.x,
+									bf4_start_y:bf4_1.attrs.y,
+									bf4_stop_x:bf4_2.attrs.x,
+									bf4_stop_y:bf4_2.attrs.y,
+									b_start_x:b_1.attrs.x,
+									b_start_y:b_1.attrs.y,
+									b_stop_x:b_2.attrs.x,
+									b_stop_y:b_2.attrs.y,
+									bf3_lenght:bf3_lenght,
+									bf4_lenght:bf4_lenght,
+									b_lenght:b_lenght,
+									lsq:lsq
+								}, function(error) {
+									if (error) {
+									} else {
+
+										alert("complete");
+										window.location.href = "measure.html";
+
+									}
+								});
+							}
+
+						</script>
+
+						<!-- Bootstrap core JavaScript-->
+						<script src="vendor/jquery/jquery.min.js"></script>
+						<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+						<!-- Core plugin JavaScript-->
+						<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+						<!-- Custom scripts for all pages-->
+						<script src="js/sb-admin-2.min.js"></script>
+
+						<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+						<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+						<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+						<script>
+							var firebaseConfig = {
+								apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+								authDomain: "labeljpn.firebaseapp.com",
+								databaseURL: "https://labeljpn.firebaseio.com",
+								projectId: "labeljpn",
+								storageBucket: "labeljpn.appspot.com",
+								messagingSenderId: "478979409533",
+								appId: "1:478979409533:web:a286086924054873c6d314",
+								measurementId: "G-74RV1SGSWC"
+							};
+							firebase.initializeApp(firebaseConfig);
+						</script>
+
+
+
+						</html>

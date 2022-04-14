@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Measure Page</title>
+
+	<style type="text/css">
+		.card{
+			float: left;
+			width: 180px;
+			margin: 5px;
+		}
+
+
+	</style>
+
+
+	<style type="text/css">
+		.inlineBTN{
+			display: inline-block;
+		}
+		.sideRight{
+			float:right;
+		}
+		.sideLeft{
+			float:left;
+		}
+
+	</style>
+
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+	<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+	<div id="wrapper">
+
+		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+			<br>
+			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+				<div class="sidebar-brand-text mx-3"> <p id="user_name"></p> </div>
+			</a>
+
+			<hr class="sidebar-divider my-0">
+			<li class="nav-item">
+				<a class="nav-link" href="label.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span>Segmentation</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="vertify.html">
+						<i class="fas fa-fw fa-tachometer-alt"></i>
+						<span>Verify</span></a>
+					</li>
+
+					<hr class="sidebar-divider my-0">
+
+					<li class="nav-item">
+						<a class="nav-link" href="userinfo2.html">
+							<i class="fas fa-fw fa-tachometer-alt"></i>
+							<span>User Information</span></a>
+						</li>
+
+
+						<li class="nav-item active">
+							<a class="nav-link" href="measure.html">
+								<i class="fas fa-fw fa-tachometer-alt"></i>
+								<span>Measure</span></a>
+							</li>
+
+
+							<li class="nav-item">
+								<a class="nav-link" href="logout.html">
+									<i class="fas fa-fw fa-tachometer-alt"></i>
+									<span>Logout</span></a>
+								</li>
+
+
+								<hr class="sidebar-divider my-0">
+								<br>
+
+								<div class="text-center d-none d-md-inline">
+									<button class="rounded-circle border-0" id="sidebarToggle"></button>
+								</div>
+							</ul>
+
+							<div id="content-wrapper" class="d-flex flex-column">
+								<div id="content">
+									<div class="container-fluid">
+										<br>
+										<h1 class="h3 mb-4 text-gray-800">PlayGround Page</h1>
+
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="inputImage2"
+											aria-describedby="inputGroupFileAddon01" multiple>
+											<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+										</div>
+
+										<button type="button" onclick="getFilename()" class="btn btn-primary">Submit</button>
+
+
+
+										<br>
+										Foldername : <input type="text" class="form-control form-control-user" id="inputFolder"  placeholder="Folder" required>
+										<br>
+
+
+
+									</div>
+								</div>
+								<footer class="sticky-footer bg-white">
+									<div class="container my-auto">
+										<div class="copyright text-center my-auto">
+											<span>Copyright &copy; Jitpanu Tanthong</span>
+										</div>
+									</div>
+								</footer>
+
+							</div>
+
+						</div>
+
+					</body>
+
+					<script type="text/javascript">
+
+						function getFilename(){
+
+							var folder_name =  document.getElementById("inputFolder").value;
+
+
+							var files = $("#inputImage2")[0].files;
+
+							for (var i = 0; i < files.length; i++)
+							{
+								
+								var filename = files[i].name.slice(0, -4);
+								console.log(filename);
+								firebase.database().ref('precrop/' + filename).set({
+									crop: "no",
+									google_drive_image_folder:folder_name
+								}, function(error) {
+
+								});
+							}
+						}
+
+
+						window.onload = function() {
+
+
+
+
+							// const queryString = window.location.search;
+							// const urlParams = new URLSearchParams(queryString);
+							// start = urlParams.get('start');
+							// stop = urlParams.get('stop');
+							// day =  urlParams.get('day');
+
+							// document.getElementById('day').innerHTML = day;
+
+
+
+
+
+
+
+
+
+						// for  (var i = 1005; i < 1015; i++) {
+
+						// 		var name = '';
+						// 	if (i.toString().length == '1') {
+						// 		name  = "IMG_000" + i.toString();
+						// 	}else if (i.toString().length == '2') {
+						// 		name  = "IMG_00" + i.toString();
+						// 	}else if (i.toString().length == '3') {
+						// 		name  = "IMG_0" + i.toString();
+						// 	}else{
+						// 		name = 'IMG_'+i.toString();
+						// 	}
+
+						// 		firebase.database().ref('precrop/' + name).set({
+						// 			crop: "no"
+						// 		}, function(error) {
+
+						// 		});
+
+						// 	}
+
+
+
+
+
+						// var username = sessionStorage.getItem("username");
+
+
+					};
+
+
+
+
+
+
+
+				</script>
+
+				<!-- Bootstrap core JavaScript-->
+				<script src="vendor/jquery/jquery.min.js"></script>
+				<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+				<!-- Core plugin JavaScript-->
+				<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+				<!-- Custom scripts for all pages-->
+				<script src="js/sb-admin-2.min.js"></script>
+
+				<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+				<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+				<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+				<script>
+					var firebaseConfig = {
+						apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+						authDomain: "labeljpn.firebaseapp.com",
+						databaseURL: "https://labeljpn.firebaseio.com",
+						projectId: "labeljpn",
+						storageBucket: "labeljpn.appspot.com",
+						messagingSenderId: "478979409533",
+						appId: "1:478979409533:web:a286086924054873c6d314",
+						measurementId: "G-74RV1SGSWC"
+					};
+					firebase.initializeApp(firebaseConfig);
+				</script>
+
+
+
+				</html>

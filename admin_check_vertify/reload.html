@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+
+
+ <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+ <script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+    authDomain: "labeljpn.firebaseapp.com",
+    databaseURL: "https://labeljpn.firebaseio.com",
+    projectId: "labeljpn",
+    storageBucket: "labeljpn.appspot.com",
+    messagingSenderId: "478979409533",
+    appId: "1:478979409533:web:a286086924054873c6d314",
+    measurementId: "G-74RV1SGSWC"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+<title>Segmentation</title>
+
+
+
+
+</head>
+<body>
+
+
+</body>
+
+<script type="text/javascript">
+ window.onload = function() {
+
+
+
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const user = urlParams.get('user');
+  const check = urlParams.get('check');
+  const image = urlParams.get('image');
+
+  var username = sessionStorage.getItem("username");
+
+  var dt = new Date();
+
+  var time = (`${
+    (dt.getMonth()+1).toString().padStart(2, '0')}/${
+      dt.getDate().toString().padStart(2, '0')}/${
+        dt.getFullYear().toString().padStart(4, '0')} ${
+          dt.getHours().toString().padStart(2, '0')}:${
+            dt.getMinutes().toString().padStart(2, '0')}:${
+              dt.getSeconds().toString().padStart(2, '0')}`
+              );
+
+
+
+
+  if (check == 'approve') {
+
+    console.log(image.substring(0, 9));
+
+    firebase.database().ref('user/'+user+'/vertify/'+image.substring(0, 9)).update({
+      status:'approve',
+      approveby:username,
+      approvetime:time
+    }, function(error) {
+      if (error) {
+      } else {
+
+        alert("Complete");
+        list_image = JSON.parse(sessionStorage.getItem("list_image"));
+
+        const index = list_image.indexOf(image);
+        if (index > -1) {
+          list_image.splice(index, 1);
+        }
+
+
+        console.log(list_image); 
+
+        sessionStorage.setItem("list_image", JSON.stringify(list_image));
+
+        window.location.href = "index.html?view=index";
+
+      }
+    });
+
+
+  }else if(check == "reject"){
+
+
+
+    firebase.database().ref('user/'+user+'/vertify/'+image.substring(0, 9)).update({
+      status:'reject',
+      approveby:username,
+      approvetime:time
+    }, function(error) {
+      if (error) {
+      } else {
+
+        alert("Complete");
+        list_image = JSON.parse(sessionStorage.getItem("list_image"));
+
+
+        const index = list_image.indexOf(image);
+        if (index > -1) {
+          list_image.splice(index, 1);
+        }
+
+
+        console.log(list_image); 
+
+        sessionStorage.setItem("list_image", JSON.stringify(list_image));
+
+        window.location.href = "index.html?view=index";
+
+      }
+    });
+
+
+
+
+  }
+
+
+
+};
+</script>
+
+
+
+</html>

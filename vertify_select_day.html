@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Vertify</title>
+
+	<style type="text/css">
+		.card{
+			float: left;
+			width: 180px;
+			margin: 5px;
+		}
+	</style>
+
+
+	<style type="text/css">
+		.inlineBTN{
+			display: inline-block;
+		}
+		.sideRight{
+			float:right;
+		}
+		.sideLeft{
+			float:left;
+		}
+
+	</style>
+
+	<!-- Custom fonts for this template-->
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+	<!-- Custom styles for this template-->
+	<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<!-- Sidebar -->
+		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+			<br>
+			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+				<div class="sidebar-brand-text mx-3"> <p id="user_name"></p> </div>
+			</a>
+
+			<hr class="sidebar-divider my-0">
+			
+
+
+
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="label.html" data-toggle="collapse" data-target="#collapseUtilities"
+				aria-expanded="true" aria-controls="collapseUtilities">
+				<i class="fas fa-fw fa-wrench"></i>
+				<span>Segmentation</span>
+			</a>
+			<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+			data-parent="#accordionSidebar">
+			<div class="bg-white py-2 collapse-inner rounded">
+				<h6 class="collapse-header">Date</h6>
+				<a class="collapse-item" href="label.html">Segmentation Page</a>
+
+
+				<a class="collapse-item" href="label_select_day.html?start=1&stop=31&day=6/Apr/2021 (รูปที่ 1-31)">6/Apr/2021 (รูปที่ 1-31)</a>
+				<a class="collapse-item" href="label_select_day.html?start=32&stop=61&day=7/Apr/2021 (รูปที่ 32-61)">7/Apr/2021 (รูปที่ 32-61)</a>
+				<a class="collapse-item" href="label_select_day.html?start=62&stop=99&day=6/Apr/2021 (รูปที่ 62-99)">6/Apr/2021 (รูปที่ 62-99)</a>
+				<a class="collapse-item" href="label_select_day.html?start=100&stop=139&day=6/Apr/2021 (รูปที่ 100-139)">6/Apr/2021 (รูปที่ 100-139)</a>
+				<a class="collapse-item" href="label_select_day.html?start=140&stop=312&day=7/Apr/2021 (รูปที่ 140-312)">7/Apr/2021 (รูปที่ 140-312)</a>
+
+
+
+			</div>
+		</div>
+	</li>
+
+
+
+
+
+
+	<li class="nav-item active">
+		<a class="nav-link" href="vertify.html">
+			<i class="fas fa-fw fa-tachometer-alt"></i>
+			<span>Verify</span></a>
+		</li>
+
+
+
+		<li class="nav-item">
+			<a class="nav-link" href="measure.html">
+				<i class="fas fa-fw fa-tachometer-alt"></i>
+				<span>Measure</span></a>
+			</li>
+
+			<hr class="sidebar-divider my-0">
+
+			<li class="nav-item">
+				<a class="nav-link" href="userinfo2.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span>User Information</span></a>
+				</li>
+
+
+				<li class="nav-item">
+					<a class="nav-link" href="how_to.html">
+						<i class="fas fa-fw fa-tachometer-alt"></i>
+						<span>How to</span></a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="logout.html">
+							<i class="fas fa-fw fa-tachometer-alt"></i>
+							<span>Logout</span></a>
+						</li>
+
+
+						<hr class="sidebar-divider my-0">
+						<br>
+
+						<div class="text-center d-none d-md-inline">
+							<button class="rounded-circle border-0" id="sidebarToggle"></button>
+						</div>
+					</ul>
+					<!-- End of Sidebar -->
+
+					<!-- Content Wrapper -->
+					<div id="content-wrapper" class="d-flex flex-column">
+
+						<!-- Main Content -->
+						<div id="content">
+
+
+
+							<!-- Begin Page Content -->
+							<div class="container-fluid">
+
+								<!-- Page Heading -->
+								<br>
+								<h1 class="h3 mb-4 text-gray-800">Verify Page</h1>
+
+								<!-- h1 class="h4 mb-4 text-gray-800" id="headerPage"></h1> -->
+
+								<div class="col-lg-6">
+									<div class="input-group">
+
+									</div>
+								</div>
+								<br>
+
+								<br>
+
+								<div class="container">
+									<div id="imageGallary1">
+									</div>
+
+								</div>
+
+
+								<div class="container">
+									<div id="imageGallary2">
+									</div>
+
+								</div>
+
+
+							</div>
+							<!-- /.container-fluid -->
+
+						</div>
+						<!-- End of Main Content -->
+
+						<!-- Footer -->
+						<footer class="sticky-footer bg-white">
+							<div class="container my-auto">
+								<div class="copyright text-center my-auto">
+									<span>Copyright &copy; Your Website 2019</span>
+								</div>
+							</div>
+						</footer>
+						<!-- End of Footer -->
+
+					</div>
+					<!-- End of Content Wrapper -->
+
+				</div>
+				<!-- End of Page Wrapper -->
+
+				<!-- Scroll to Top Button-->
+
+
+
+
+
+				<script type="text/javascript">
+
+
+
+					var start = 0;
+					var stop = 0;
+
+
+					window.onload = function() {
+
+						const queryString = window.location.search;
+						const urlParams = new URLSearchParams(queryString);
+
+						start = urlParams.get('start');
+
+						stop = urlParams.get('stop');
+
+						document.getElementById("user_name").innerHTML = "Hi, "+sessionStorage.getItem("username");
+						var username = sessionStorage.getItem("username");
+						var leadsRef = firebase.database().ref('user/'+username+'/'+'vertify');
+						leadsRef.once("value",snapshot => {
+
+							if (snapshot.exists()){
+								const userData = snapshot.val();
+								var img = Object.keys(userData);
+
+								console.log(img);
+								drawImage(img);
+
+							}else{
+								console.log("ไม่มี");
+								var img = '';
+								drawImage(img)
+							}
+						});
+
+
+
+					};
+
+
+
+					function drawImage(img) {
+
+
+						var i;
+						for (i = start; i <= stop; i++) {
+							var name = '';
+							if (i.toString().length == '1') {
+								name  = "img_0000" + i.toString();
+							}else if (i.toString().length == '2') {
+								name  = "img_000" + i.toString();
+							}else if (i.toString().length == '3') {
+								name  = "img_00" + i.toString();
+							}else if (i.toString().length == '4') {
+								name  = "img_0" + i.toString();
+							}else{
+								name = 'img_'+i.toString();
+							}
+
+
+							var div_new = document.getElementById('imageGallary1');
+							div_new.innerHTML +=  '<div id="div-'+name+'" style="opacity:1;" class="card shadow mb-4"><div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary" id="imagename-'+name+'">'+'<a target="_blank" id="href-'+name+'" href=""'+'</h6></div><div class="card-body"> <img id="image-url'+name+'" src="'+'" alt="Cinque Terre" width="100%" ></a>'+'<p id="coin-'+name+'">Coin : '+'</p>'+'<div class="mb-1 small" id="count-'+name+'">'+'</div><div class="progress progress-sm mb-2"><div class="progress-bar" role="progressbar" id="'+name+'_width" style="width: '+'%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>'+'</a></div></div>';
+
+
+
+
+
+
+							var count_div = 1;
+							var username = sessionStorage.getItem("username");
+							var storageRef = firebase.storage().ref("images/");
+
+							var div_new = document.getElementById('imageGallary1');
+							var div_old = document.getElementById('imageGallary2');
+
+							storageRef.child(name+".jpg").getDownloadURL().then(function(url) {	
+
+								var count =0;
+								var count2 =0;
+								var ref = firebase.database().ref('image/'+getImageName(url));
+								var ref3 = firebase.database().ref('image/'+getImageName(url));
+
+
+								var ref2 = firebase.database().ref("image/"+getImageName(url));
+								ref2.once("value")
+								.then(function(snapshot){
+									var coin = snapshot.child("coin").val();
+
+
+									// if (img.includes(getImageName(url))) {
+									// 	div_old.innerHTML +=  '<div style="opacity:0.3;" class="card shadow mb-4"><div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary">'+getImageName(url)+'<a target="_blank" href="image_select_vertify/?image='+getImageName(url)+'&view=index"'+getImageName(url)+"&username="+username+'</h6></div><div class="card-body"> <img src="'+url+'" alt="Cinque Terre" width="100%" ></a>'+'<p>Coin : '+coin+'<div class="mb-1 small" id="'+getImageName(url)+'">'+'</div><div class="progress progress-sm mb-2"><div class="progress-bar" role="progressbar" id="'+getImageName(url)+'_width" style="width: '+'%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>'+'</a></div></div>';
+									// }else{
+
+
+
+										// MAIN
+										// div_new.innerHTML +=  '<div id="div-'+getImageName(url)+'" style="opacity:1;" class="card shadow mb-4"><div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary">'+getImageName(url)+'<a target="_blank" href="image_select_vertify/?image='+getImageName(url)+'&view=index&'+"&username="+username+'"'+getImageName(url)+'</h6></div><div class="card-body"> <img src="'+url+'" alt="Cinque Terre" width="100%" ></a>'+'<p>Coin : '+coin+'</p>'+'<div class="mb-1 small" id="'+getImageName(url)+'">'+'</div><div class="progress progress-sm mb-2"><div class="progress-bar" role="progressbar" id="'+getImageName(url)+'_width" style="width: '+'%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>'+'</a></div></div>';
+
+
+
+										document.getElementById("imagename-"+getImageName(url)).innerHTML = getImageName(url);
+										document.getElementById("image-url"+getImageName(url)).src = url;
+										document.getElementById("href-"+getImageName(url)).href = 'image_select_vertify/?image='+getImageName(url)+'&view=index&'+'&username='+username;
+										document.getElementById("coin-"+getImageName(url)).innerHTML = "Coin : " + coin;
+
+
+
+										// div_new.innerHTML +=  '<div id="div-'+count_div+'" style="opacity:1;" class="card shadow mb-4"><div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary" id="imagename-'+count_div+'">'+'<a target="_blank" href="image_select_vertify/?image='+'&view=index&'+"&username="+'"'+'</h6></div><div class="card-body"> <img src="'+'" alt="Cinque Terre" width="100%" ></a>'+'<p>Coin : '+'</p>'+'<div class="mb-1 small" id="'+'">'+'</div><div class="progress progress-sm mb-2"><div class="progress-bar" role="progressbar" id="'+'_width" style="width: '+'%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>'+'</a></div></div>';
+										// count_div = count_div+1;
+									// }
+
+								});
+
+
+								// var ref4 = firebase.database().ref('image/'+getImageName(url));
+
+
+
+								var count_ver1 = 0;
+								var count_ver2 = 0;
+
+
+
+								ref.once("value")
+								.then(function(snapshot) {
+									snapshot.forEach(function(childSnapshot) {
+
+										var key2 = childSnapshot.key;
+
+										var username = sessionStorage.getItem("username");
+										var all_key = snapshot.numChildren();
+										// console.log(key2);
+
+										var ref5 = firebase.database().ref('image/'+getImageName(url)+'/'+key2+'/vertify');
+										ref5.once("value",snapshot => {
+
+
+											if (snapshot.exists()){
+												const userData = snapshot.val();
+												var key = Object.keys(snapshot.val());
+												// console.log(key2);
+												// console.log(snapshot.numChildren());
+												console.log(getImageName(url));
+												console.log("exists!", key);
+
+												if (key.includes(username)) {
+													count_ver1 = count_ver1+1;
+												}
+
+												console.log(count_ver1);
+												console.log(all_key-3);
+
+
+
+												var div = document.getElementById("count-"+getImageName(url));
+												div.innerHTML = count_ver1+"/"+(all_key-3);
+
+												var node = document.getElementById("count-"+getImageName(url)),
+												htmlContent = node.innerHTML,
+												textContent = node.textContent;
+
+												var res = htmlContent.split("/");
+												document.getElementById(getImageName(url)+'_width').style.width = (res[0]/res[1])*100+'%';
+
+
+												if (res[0] == res[1]) {
+													// document.getElementById("div-"+getImageName(url)).style.opacity = "0.5";
+													var myobj = document.getElementById("div-"+getImageName(url));
+													myobj.remove();
+												}
+
+
+											}
+											else{
+
+												count_ver2=0;
+
+												var div = document.getElementById("count-"+getImageName(url));
+												div.innerHTML = count_ver2+"/"+(all_key-3);
+
+												var node = document.getElementById("count-"+getImageName(url)),
+												htmlContent = node.innerHTML,
+												textContent = node.textContent;
+
+												var res = htmlContent.split("/");
+												document.getElementById(getImageName(url)+'_width').style.width = (res[0]/res[1])*100+'%';
+
+											}
+
+
+
+										});
+
+
+
+
+
+
+
+
+
+
+										// var ref2 = firebase.database().ref('image/'+getImageName(url)+'/'+key2+'/vertify');
+
+
+										// ref2.on("value", function(snapshot) {
+										// 	if (snapshot.numChildren() == 0) {}
+										// 		else{
+
+										// 			count += snapshot.numChildren();
+
+										// 			var div = document.getElementById(getImageName(url));
+										// 			div.innerHTML = count;
+
+										// 		}
+
+										// 	});
+
+									});
+									// ref4.on("value", function(snapshot) {
+									// 	if (snapshot.numChildren() == 0) {}
+									// 		else{
+
+									// 			count2 += snapshot.numChildren();
+
+									// 			var div = document.getElementById(getImageName(url));
+									// 			div.innerHTML += "/"+(count2-3);
+
+									// 			var node = document.getElementById(getImageName(url)),
+									// 			htmlContent = node.innerHTML,
+									// 			textContent = node.textContent;
+
+									// 			var res = htmlContent.split("/");
+									// 			document.getElementById(getImageName(url)+'_width').style.width = (res[0]/res[1])*100+'%';
+
+
+
+									// 		}
+
+									// 	});
+
+								});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							}).catch(function(error) {
+
+							});
+
+
+
+						}
+
+					}
+
+
+					function getImageName(url) {
+						var img_name = url.substring(
+							url.lastIndexOf("F") + 1, 
+							url.lastIndexOf(".jpg")
+							);
+						return img_name;
+					}
+
+
+
+
+				</script>
+
+				<!-- Bootstrap core JavaScript-->
+				<script src="vendor/jquery/jquery.min.js"></script>
+				<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+				<!-- Core plugin JavaScript-->
+				<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+				<!-- Custom scripts for all pages-->
+				<script src="js/sb-admin-2.min.js"></script>
+
+				<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+				<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+				<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+				<script>
+					var firebaseConfig = {
+						apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+						authDomain: "labeljpn.firebaseapp.com",
+						databaseURL: "https://labeljpn.firebaseio.com",
+						projectId: "labeljpn",
+						storageBucket: "labeljpn.appspot.com",
+						messagingSenderId: "478979409533",
+						appId: "1:478979409533:web:a286086924054873c6d314",
+						measurementId: "G-74RV1SGSWC"
+					};
+					firebase.initializeApp(firebaseConfig);
+				</script>
+
+			</body>
+
+			</html>

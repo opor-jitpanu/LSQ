@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>admin-data</title>
+</head>
+<body>
+
+
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+<script>
+	var firebaseConfig = {
+		apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+		authDomain: "labeljpn.firebaseapp.com",
+		databaseURL: "https://labeljpn.firebaseio.com",
+		projectId: "labeljpn",
+		storageBucket: "labeljpn.appspot.com",
+		messagingSenderId: "478979409533",
+		appId: "1:478979409533:web:a286086924054873c6d314",
+		measurementId: "G-74RV1SGSWC"
+	};
+	firebase.initializeApp(firebaseConfig);
+</script>
+
+
+
+<script type="text/javascript">
+	window.onload = function() {
+
+
+		const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
+		const image = urlParams.get('image');
+		const loop = urlParams.get('loop');
+		const coin = urlParams.get('coin');
+		var username = sessionStorage.getItem("username");
+
+		console.log(coin);
+		for (var i = 0; i < loop; i++) {
+
+			var count2 = i+parseInt(image);
+
+			if (count2.toString().length == '1') {
+				name  = "0000" + count2.toString();
+			}else if (count2.toString().length == '2') {
+				name  = "000" + count2.toString();
+			}else if (count2.toString().length == '3') {
+				name  = "00" + count2.toString();
+			}else if (count2.toString().length == '4') {
+				name  = "0" + count2.toString();
+			}else{
+				name = ''+count2.toString();
+			}
+
+			console.log(name);
+
+
+			var dt = new Date();
+
+			var time = (`${
+				(dt.getMonth()+1).toString().padStart(2, '0')}/${
+					dt.getDate().toString().padStart(2, '0')}/${
+						dt.getFullYear().toString().padStart(4, '0')} ${
+							dt.getHours().toString().padStart(2, '0')}:${
+								dt.getMinutes().toString().padStart(2, '0')}:${
+									dt.getSeconds().toString().padStart(2, '0')}`
+									);
+
+			firebase.database().ref('image/img_' + name).set({
+				upload: username,
+				coin:coin,
+				uploadtime:time
+			}, function(error) {
+				if (error) {
+				} else {
+					console.log(loop);
+					console.log(i);
+					if (loop == i) {
+						alert("complete");
+						window.location.href = "admin.html";
+					}
+
+					
+				}
+			});
+
+		}
+
+		
+
+
+
+
+	}
+
+
+</script>
+
+
+</html>

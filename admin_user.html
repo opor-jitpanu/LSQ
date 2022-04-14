@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Admin</title>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+	<link href="css/sb-admin-2.min.css" rel="stylesheet">
+	<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+
+	<link href="https://code.jquery.com/jquery-3.3.1.js" rel="stylesheet">
+	<link href="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" rel="stylesheet">
+	<link href="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js" rel="stylesheet">
+	<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"></script>
+
+
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+
+
+
+	<link href="https://code.jquery.com/jquery-3.5.1.js" rel="stylesheet">
+	<link href="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" rel="stylesheet">
+	<link href="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js" rel="stylesheet">
+	<link href="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js" rel="stylesheet">
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" rel="stylesheet">
+	<link href="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js" rel="stylesheet">
+	<link href="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js" rel="stylesheet">
+
+
+	<style type="text/css">
+		.inlineBTN{
+			display: inline-block;
+		}
+		.sideRight{
+			float:right;
+		}
+		.sideLeft{
+			float:left;
+		}
+
+	</style>
+
+
+
+</head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<!-- Sidebar -->
+		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+			<!-- Sidebar - Brand -->
+			<br>
+			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin.html">
+        <!-- <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
+        </div> -->
+        <div class="sidebar-brand-text mx-3"> <p id="user_name">Admin</p> </div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+
+
+      <li class="nav-item active">
+        <a class="nav-link" href="admin.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Admin</span></a>
+        </li>
+
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="add_image.html">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Upload Image</span></a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="admin_image.html">
+              <i class="fas fa-fw fa-tachometer-alt"></i>
+              <span>Image Information</span></a>
+            </li>
+
+            <hr class="sidebar-divider my-0">
+            <li class="nav-item">
+              <a class="nav-link" href="logout.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Logout</span></a>
+              </li>
+
+
+              <!-- Sidebar Toggler (Sidebar) -->
+              <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+              </div>
+
+            </ul>
+            <!-- End of Sidebar -->
+
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+
+             <!-- Main Content -->
+             <div id="content">
+              <div class="container-fluid">
+
+               <br>
+               <h1 class="h3 mb-4 text-gray-800">Admin Page</h1>
+
+               <div class="col-lg-6">
+                <div class="input-group">
+
+                </div>
+              </div>
+
+
+
+
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+
+                 <h6 class="m-0 font-weight-bold text-primary inlineBTN "  id="tableHead"></h6>
+                 <button class="btn btn-primary sideRight" id="exportButton">
+                  <span class="text">Export</span>
+                </button>
+
+                <button class="btn btn-primary sideRight" id="button">
+                  <span class="text">Check</span>
+                </button>
+                <!-- <p id="tableSum"></p> -->
+
+              </div>
+              <div class="card-body">
+               <div class="table-responsive">
+                <table class="table table-bordered" id="segmentTable" class="display" style="width:100%" cellspacing="0">
+                 <thead>
+                  <tr>
+                   <th>Select</th>
+                   <th>Segment Image</th>
+                   <th>Coin</th>
+                   <th>Segment Time</th>
+                   <th>Status</th>
+                   <th>Approve By</th>
+                   <th>Approve Time</th>
+                 </tr>
+               </thead>
+               <tbody>
+
+               </tbody>
+             </table>
+           </div>
+         </div>
+       </div>
+
+       <div class="card shadow mb-4">
+        <div class="card-header py-3">
+         <h6 class="m-0 font-weight-bold text-primary inlineBTN" id="tableHead2"></h6>
+
+         <button class="btn btn-primary sideRight" id="exportButton2">
+          <span class="text">Export</span>
+        </button>
+
+
+        <button class="btn btn-primary sideRight" id="buttonCheck">
+          <span class="text">Check</span>
+        </button>
+
+
+
+      </div>
+      <div class="card-body">
+       <div class="table-responsive">
+        <table class="table table-bordered" id="vertifyTable" width="100%" cellspacing="0">
+         <thead>
+          <tr>
+           <th>Select</th>
+           <th>Vertify Image</th>
+           <th>Coin</th>
+           <th>Vertify Time</th>
+           <th>Status</th>
+           <th>Approve By</th>
+           <th>Approve Time</th>
+         </tr>
+       </thead>
+       <tbody>
+
+       </tbody>
+     </table>
+   </div>
+ </div>
+</div>
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <h4 class="modal-title" id="exampleModalLabel">Select Image</h4>
+
+   </div>
+   <div class="modal-body">
+     <h5 class="h5 mb-4 text-gray-800" id="uploadProgress1"></h5>
+     <h5 class="h5 mb-4 text-gray-800" id="uploadProgress2"></h5>
+     <button class="btn btn-success btn-icon-split sideLeft" id="buttonApprove">
+      <span class="text">Confirm</span>
+    </button>
+  </div>
+
+</div>
+</div>
+</div>
+
+
+
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <h4 class="modal-title" id="exampleModalLabel">Select Image</h4>
+
+   </div>
+   <div class="modal-body">
+     <h5 class="h5 mb-4 text-gray-800" id="uploadProgress3"></h5>
+     <h5 class="h5 mb-4 text-gray-800" id="uploadProgress4"></h5>
+     <button class="btn btn-success btn-icon-split sideLeft" id="buttonApprove2">
+      <span class="text">Confirm</span>
+    </button>
+  </div>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+  <div class="container my-auto">
+   <div class="copyright text-center my-auto">
+    <span>Copyright &copy; Your Website 2019</span>
+  </div>
+</div>
+</footer>
+</div>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+  window.onload = function() {
+
+   $('#exampleModal').modal('hide');
+
+
+   $('#segmentTable').DataTable({
+    dom: 'Bfrtip',
+    buttons: [
+    'copy', 'csv', 'excel', 'pdf', 'print'
+    ]
+  });
+
+
+
+   $('#vertifyTable').DataTable();
+
+
+   const queryString = window.location.search;
+   const urlParams = new URLSearchParams(queryString);
+   const user = urlParams.get('user');
+
+   document.getElementById("tableHead").innerHTML = user.toUpperCase()+' : SEGMENT IMAGE';
+   document.getElementById("tableHead2").innerHTML = user.toUpperCase()+' : VERTIFY IMAGE';
+
+   var t1 = $('#segmentTable').DataTable();
+   var t2 = $('#vertifyTable').DataTable();
+
+
+
+
+   var ref = firebase.database().ref('user/'+user+'/annotation/');
+   ref.on('child_added', function(snapshot) { 
+
+    var data = snapshot.val();
+    var key1 = snapshot.key;
+
+
+
+    var ref2 = firebase.database().ref("image/"+key1);
+    ref2.once("value")
+    .then(function(snapshot){
+     var coin = snapshot.child("coin").val();
+
+
+
+
+
+     var ref5 = firebase.database().ref("image/"+key1+"/"+user);
+
+     ref5.once("value")
+     .then(function(snapshot){
+       var submit = snapshot.child("submit").val();
+       console.log(submit);
+
+
+       if (submit == "yes") {
+
+
+
+        t1.row.add( [
+
+          '<center><a class="btn btn-success btn-icon-split"  href="admin_segment/index.html?view=edit&id=0&user='+user+'&image='+key1+'">'+'Check'+'</a></center>',
+          key1,
+          coin,
+          data.time,
+          '<div class="status">'+data.status.toUpperCase()+'</div>',
+          data.approveby,
+          data.approvetime
+
+          ] ).draw( false );
+
+
+      }
+
+
+    });
+
+
+
+
+
+     
+
+
+
+
+
+
+
+
+
+
+
+
+   });
+  });
+
+
+   var ref2 = firebase.database().ref('user/'+user+'/vertify/');
+
+   ref2.on('child_added', function(snapshot) { 
+    var data = snapshot.val();
+    var key1 = snapshot.key;
+    var ref4 = firebase.database().ref('user/'+user+'/vertify/'+key1);
+    var ref3 = firebase.database().ref("image/"+key1);
+    ref3.once("value")
+    .then(function(snapshot){
+     var coin = snapshot.child("coin").val();
+
+     ref4.once("value")
+     .then(function(snapshot){
+      var owner = snapshot.child("owner").val();
+
+
+
+      t2.row.add( [
+       '<center><a class="btn btn-success btn-icon-split" href="admin_vertify/index.html?view=edit&id=0&user='+owner+'&image='+key1+'&ownervertify='+user+'">'+"Check"+'</a></center>',
+       key1+"_"+data.owner,
+       coin,
+       data.time,
+       '<div class="status1">'+data.status.toUpperCase()+'</div>',
+       data.approveby,
+       data.approvetime
+       ] ).draw( false );
+
+
+
+
+    });
+
+
+   });
+  });
+
+
+
+ };
+
+
+
+ $(document).ready(function() {
+
+   var table = $('#segmentTable').DataTable();
+   var tableVertify = $('#vertifyTable').DataTable();
+
+
+
+
+
+
+   $('#segmentTable tbody').on( 'click', 'tr', function () {
+    $(this).toggleClass('selected');
+    if ($(this).find(".status").html() == 'APPROVE' && $(this).find(".redeem").html() == "NO") {
+     $(this).toggleClass('selected');
+   }
+ } );
+
+
+   $('#vertifyTable tbody').on( 'click', 'tr', function () {
+    $(this).toggleClass('selected');
+    if ($(this).find(".status1").html() == 'APPROVE' && $(this).find(".redeem1").html() == "NO") {
+     $(this).toggleClass('selected');
+   }
+ } );
+
+
+
+
+   $('#button').click( function () {
+
+
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const user = urlParams.get('user');
+
+    sessionStorage.removeItem('list_image');
+
+    var count = table.rows('.selected').data().length;
+
+    var list_image = [];
+
+    list_image.push(user);
+
+
+    for (var i = 0; i < count; i++) {
+
+     list_image.push(table.rows('.selected').data()[i][1]);
+
+     console.log(list_image);
+     sessionStorage.setItem("list_image", JSON.stringify(list_image));
+
+     window.location.href = "admin_check_segment/?view=index";
+
+   }
+
+
+
+ } );
+
+
+
+
+
+
+
+
+   $('#buttonCheck').click( function () {
+
+
+
+
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const user = urlParams.get('user');
+
+    sessionStorage.removeItem('list_image');
+
+    var count = tableVertify.rows('.selected').data().length;
+
+
+    var list_image = [];
+
+    list_image.push(user);
+
+
+    for (var i = 0; i < count; i++) {
+
+     list_image.push(tableVertify.rows('.selected').data()[i][1]);
+
+     console.log(list_image);
+     sessionStorage.setItem("list_image", JSON.stringify(list_image));
+
+     window.location.href = "admin_check_vertify/?view=index";
+
+   }
+
+
+
+ } );
+
+
+
+
+
+
+
+
+
+
+
+
+
+   $('#exportButton').click( function () {
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const user = urlParams.get('user');
+
+    window.location.href = "admin_user_export.html?user="+user+"&type=annotation";
+
+
+
+  } );
+
+   $('#exportButton2').click( function () {
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const user = urlParams.get('user');
+
+    window.location.href = "admin_user_export.html?user="+user+"&type=vertify";
+
+
+
+  } );
+
+
+
+
+
+   $('#button2').click( function () {
+
+    var count = tableVertify.rows('.selected').data().length;
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const user = urlParams.get('user');
+    var count_coin = 0;
+
+    $('#exampleModal2').modal('show');
+    for (var i = 0; i < count; i++) {
+
+     count_coin += parseFloat(tableVertify.rows('.selected').data()[0][1]);
+
+     document.getElementById("uploadProgress3").innerHTML = " You Select "+count+" images";
+     document.getElementById("uploadProgress4").innerHTML = "รวมเป็น "+count_coin+" บาท";
+   }
+
+
+ } );
+
+
+
+   $('#buttonApprove').click( function () {
+    var count = table.rows('.selected').data().length;
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const user = urlParams.get('user');
+
+
+    for (var i = 0; i < count; i++) {
+
+     var textContent = table.rows('.selected').data()[i][0];
+
+     var mySubString = textContent.substring(
+      textContent.lastIndexOf("=") + 1, 
+      textContent.lastIndexOf('">')
+      );
+
+     console.log(mySubString);
+
+     var count_check= 0;
+
+     firebase.database().ref('user/'+user+'/annotation/'+mySubString).update({
+      redeem:'yes'
+    }, function(error) {
+      if (error) {
+      } else {
+       count_check += 1;
+       if (count_check == count) {
+        window.location.href = "admin_user.html?user="+user;
+
+      }
+    }
+  });
+
+   }
+
+ } );
+
+
+
+
+
+
+   $('#buttonApprove2').click( function () {
+    var count = tableVertify.rows('.selected').data().length;
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const user = urlParams.get('user');
+
+    for (var i = 0; i < count; i++) {
+
+
+     var textContent = tableVertify.rows('.selected').data()[i][0];
+
+
+
+     const urlParams2 = new URLSearchParams(textContent);
+     const user2 = urlParams2.get('image');
+
+
+     var mySubString2 = user2.substring(
+      user2.lastIndexOf("") + 1, 
+      user2.lastIndexOf('">')
+      );
+
+     console.log(mySubString2);
+
+
+     var count_check= 0;
+     firebase.database().ref('user/'+user+'/vertify/'+mySubString2).update({
+      redeem:'yes'
+    }, function(error) {
+      if (error) {
+      } else {
+       count_check += 1;
+       if (count_check == count) {
+
+        window.location.href = "admin_user.html?user="+user;
+
+      }
+    }
+  });
+
+   }
+
+ } );
+
+
+
+
+
+
+ } );
+
+
+</script>
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+<script>
+  var firebaseConfig = {
+   apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+   authDomain: "labeljpn.firebaseapp.com",
+   databaseURL: "https://labeljpn.firebaseio.com",
+   projectId: "labeljpn",
+   storageBucket: "labeljpn.appspot.com",
+   messagingSenderId: "478979409533",
+   appId: "1:478979409533:web:a286086924054873c6d314",
+   measurementId: "G-74RV1SGSWC"
+ };
+ firebase.initializeApp(firebaseConfig);
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Label Page</title>
+
+	<style type="text/css">
+		.card{
+			float: left;
+			width: 180px;
+			margin: 5px;
+		}
+
+
+	</style>
+
+
+	<style type="text/css">
+		.inlineBTN{
+			display: inline-block;
+		}
+		.sideRight{
+			float:right;
+		}
+		.sideLeft{
+			float:left;
+		}
+
+	</style>
+
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+	<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+	<div id="wrapper">
+
+		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+			<br>
+			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+				<div class="sidebar-brand-text mx-3"> <p id="user_name"></p> </div>
+			</a>
+
+			<hr class="sidebar-divider my-0">
+			
+
+
+
+			<li class="nav-item active">
+				<a class="nav-link collapsed" href="label.html" data-toggle="collapse" data-target="#collapseUtilities"
+				aria-expanded="true" aria-controls="collapseUtilities">
+				<i class="fas fa-fw fa-wrench"></i>
+				<span>Segmentation</span>
+			</a>
+			<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+			data-parent="#accordionSidebar">
+			<div class="bg-white py-2 collapse-inner rounded">
+				<h6 class="collapse-header">Date</h6>
+				<a class="collapse-item" href="label.html">Segmentation Page</a>
+
+
+				<a class="collapse-item" href="label_select_day.html?start=1&stop=31&day=6/Apr/2021 (รูปที่ 1-31)">6/Apr/2021 (รูปที่ 1-31)</a>
+				<a class="collapse-item" href="label_select_day.html?start=32&stop=61&day=7/Apr/2021 (รูปที่ 32-61)">7/Apr/2021 (รูปที่ 32-61)</a>
+				<a class="collapse-item" href="label_select_day.html?start=62&stop=99&day=6/Apr/2021 (รูปที่ 62-99)">6/Apr/2021 (รูปที่ 62-99)</a>
+				<a class="collapse-item" href="label_select_day.html?start=100&stop=139&day=6/Apr/2021 (รูปที่ 100-139)">6/Apr/2021 (รูปที่ 100-139)</a>
+				<a class="collapse-item" href="label_select_day.html?start=140&stop=312&day=7/Apr/2021 (รูปที่ 140-312)">7/Apr/2021 (รูปที่ 140-312)</a>
+
+
+
+			</div>
+		</div>
+	</li>
+
+
+
+
+
+
+	<li class="nav-item">
+		<a class="nav-link" href="vertify.html">
+			<i class="fas fa-fw fa-tachometer-alt"></i>
+			<span>Verify</span></a>
+		</li>
+
+
+
+		<li class="nav-item">
+			<a class="nav-link" href="measure.html">
+				<i class="fas fa-fw fa-tachometer-alt"></i>
+				<span>Measure</span></a>
+			</li>
+
+			<hr class="sidebar-divider my-0">
+
+			<li class="nav-item">
+				<a class="nav-link" href="userinfo2.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span>User Information</span></a>
+				</li>
+
+
+				<li class="nav-item">
+					<a class="nav-link" href="how_to.html">
+						<i class="fas fa-fw fa-tachometer-alt"></i>
+						<span>How to</span></a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="logout.html">
+							<i class="fas fa-fw fa-tachometer-alt"></i>
+							<span>Logout</span></a>
+						</li>
+
+
+						<hr class="sidebar-divider my-0">
+						<br>
+
+						<div class="text-center d-none d-md-inline">
+							<button class="rounded-circle border-0" id="sidebarToggle"></button>
+						</div>
+					</ul>
+
+					<div id="content-wrapper" class="d-flex flex-column">
+						<div id="content">
+							<div class="container-fluid">
+								<br>
+
+
+
+
+								<h1 class="h3 mb-4 text-gray-800">Segmentation Page</h1>
+								<h1 class="h4 mb-4 text-gray-800">เลือกวันที่ที่ต้องการทำ Segment</h1>
+								<!-- เลือกวันที่ -->
+								<br>
+								<button onclick="day1()" class="btn btn-primary" id="crop_button">6 / Apr / 2021 (รูปที่ 1-31)</button>
+								<br>
+								<br>
+								<button onclick="day2()" class="btn btn-primary" id="crop_button">7 / Apr / 2021 (รูปที่ 32-61)</button>
+								<br>
+								<br>
+								<button onclick="day3()" class="btn btn-primary" id="crop_button">6 / Apr / 2021 (รูปที่ 62-99) </button>
+								<br>
+								<br>
+								<button onclick="day4()" class="btn btn-primary" id="crop_button">6 / Apr / 2021 (รูปที่ 100-139) </button>
+								<br>
+								<br>
+								<button onclick="day5()" class="btn btn-primary" id="crop_button">7 / Apr / 2021 (รูปที่ 140-312) </button>
+								<br>
+
+
+							</div>
+						</div>
+						<footer class="sticky-footer bg-white">
+							<div class="container my-auto">
+								<div class="copyright text-center my-auto">
+									<span>Copyright &copy; Jitpanu Tanthong</span>
+								</div>
+							</div>
+						</footer>
+
+					</div>
+
+				</div>
+
+			</body>
+
+			<script type="text/javascript">
+
+				function day1(){
+					window.location.href = "label_select_day.html?start=1&stop=31&day=6/Apr/2021 (รูปที่ 1-31)";
+				}
+
+				function day2(){
+					window.location.href = "label_select_day.html?start=32&stop=61&day=7/Apr/2021 (รูปที่ 32-61)";
+				}
+
+				function day3(){
+					window.location.href = "label_select_day.html?start=62&stop=99&day=6/Apr/2021 (รูปที่ 62-99)";
+				}
+
+				function day4(){
+					window.location.href = "label_select_day.html?start=100&stop=139&day=7/Apr/2021 (รูปที่ 100-139)";
+				}
+				function day5(){
+					window.location.href = "label_select_day.html?start=140&stop=312&day=7/Apr/2021 (รูปที่ 140-312)";
+				}
+
+
+			</script>
+
+			<!-- Bootstrap core JavaScript-->
+			<script src="vendor/jquery/jquery.min.js"></script>
+			<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+			<!-- Core plugin JavaScript-->
+			<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+			<!-- Custom scripts for all pages-->
+			<script src="js/sb-admin-2.min.js"></script>
+
+			<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+			<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+			<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+			<script>
+				var firebaseConfig = {
+					apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+					authDomain: "labeljpn.firebaseapp.com",
+					databaseURL: "https://labeljpn.firebaseio.com",
+					projectId: "labeljpn",
+					storageBucket: "labeljpn.appspot.com",
+					messagingSenderId: "478979409533",
+					appId: "1:478979409533:web:a286086924054873c6d314",
+					measurementId: "G-74RV1SGSWC"
+				};
+				firebase.initializeApp(firebaseConfig);
+			</script>
+
+			<script>
+
+
+				window.onload = function() {
+					console.log(sessionStorage.getItem("username"));
+					document.getElementById("user_name").innerHTML = "Hi, "+ (sessionStorage.getItem("username")).toString();
+
+				};
+
+				var tag = document.createElement('script');
+
+				tag.src = "https://www.youtube.com/iframe_api";
+				var firstScriptTag = document.getElementsByTagName('script')[0];
+				firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+				var player;
+				var player2;
+				var player3;
+				function onYouTubeIframeAPIReady() {
+					player = new YT.Player('player', {
+						height: '180',
+						width: '300',
+						videoId: '4dcqIumhhvA',
+						events: {
+							'onReady': onPlayerReady,
+							'onStateChange': onPlayerStateChange
+						}
+					});
+
+					player2 = new YT.Player('player2', {
+						height: '180',
+						width: '300',
+						videoId: '3th2d2yH6-s',
+						events: {
+							'onReady': onPlayerReady,
+							'onStateChange': onPlayerStateChange
+						}
+					});
+
+					player3 = new YT.Player('player3', {
+						height: '180',
+						width: '300',
+						videoId: '0vNnbM_E6Yw',
+						events: {
+							'onReady': onPlayerReady,
+							'onStateChange': onPlayerStateChange
+						}
+					});
+				}
+
+				function onPlayerReady(event) {
+				}
+
+				var done = false;
+				function onPlayerStateChange(event) {
+					if (event.data == YT.PlayerState.PLAYING && !done) {
+						setTimeout(stopVideo, 6000);
+						done = true;
+					}
+				}
+				function stopVideo() {
+					player.stopVideo();
+				}
+			</script>
+
+			</html>

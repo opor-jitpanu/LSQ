@@ -1,0 +1,17 @@
+{
+  "labels": [
+    "background",
+    "skin",
+    "hair",
+    "dress",
+    "glasses",
+    "jacket",
+    "skirt"
+  ],
+  "imageURLs": [
+    "data/images/1.jpg"
+  ],
+  "annotationURLs": [
+    "data/annotations/1.png"
+  ]
+}

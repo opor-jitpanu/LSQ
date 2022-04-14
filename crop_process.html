@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+
+
+	<title>Crop Page</title>
+
+	<style type="text/css">
+		.card{
+			float: left;
+			width: 180px;
+			margin: 5px;
+		}
+
+
+
+
+	</style>
+
+
+	<style type="text/css">
+		.inlineBTN{
+			display: inline-block;
+		}
+		.sideRight{
+			float:right;
+		}
+		.sideLeft{
+			float:left;
+		}
+		img {
+			display: block;
+
+			/* This rule is very important, please don't ignore this */
+			max-width: 100%;
+		}
+
+		#canvas {
+			height: 600px;
+			width: 600px;
+			background-color: #ffffff;
+			cursor: default;
+			border: 1px solid black;
+		}
+
+		#canvas2{
+			/*width: 100%;*/
+			width: 2000px;
+		}
+
+
+
+
+	</style>
+
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+	<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+	<link src="cropper/croppr.css" rel="stylesheet"/>
+	<script src="cropper/croppr.js"></script>
+
+
+	<script src="dist/croppr.js"></script>
+	<link rel="stylesheet" href="dist/croppr.css">
+
+</head>
+
+<body id="page-top">
+
+	<div id="wrapper">
+
+		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+			<br>
+			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+				<div class="sidebar-brand-text mx-3"> <p id="user_name"></p> </div>
+			</a>
+
+			<hr class="sidebar-divider my-0">
+			<li class="nav-item">
+				<a class="nav-link" href="#">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span>Admin</span></a>
+				</li>
+
+
+
+				<li class="nav-item">
+					<a class="nav-link" href="add_image.html">
+						<i class="fas fa-fw fa-tachometer-alt"></i>
+						<span>Upload Image</span></a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="admin_image.html">
+							<i class="fas fa-fw fa-tachometer-alt"></i>
+							<span>Image Information</span></a>
+						</li>
+
+
+						<li class="nav-item active">
+							<a class="nav-link" href="crop.html">
+								<i class="fas fa-fw fa-tachometer-alt"></i>
+								<span>Crop</span></a>
+							</li>
+
+
+							
+							<li class="nav-item">
+								<a class="nav-link" href="reference.html">
+									<i class="fas fa-fw fa-tachometer-alt"></i>
+									<span>Reference</span></a>
+								</li>
+
+								<hr class="sidebar-divider my-0">
+								<li class="nav-item">
+									<a class="nav-link" href="logout.html">
+										<i class="fas fa-fw fa-tachometer-alt"></i>
+										<span>Logout</span></a>
+									</li>
+
+
+									<hr class="sidebar-divider my-0">
+									<br>
+
+									<div class="text-center d-none d-md-inline">
+										<button class="rounded-circle border-0" id="sidebarToggle"></button>
+									</div>
+								</ul>
+
+								<div id="content-wrapper" class="d-flex flex-column">
+
+
+
+									<div id="content">
+										<div class="container-fluid">
+											<br>
+											<h1 class="h3 mb-4 text-gray-800">Crop Page</h1>
+
+											
+
+
+											<button onclick="submit_image()" class="btn btn-primary" id="crop_button"> - Submit - </button>
+
+											<br><br>
+
+
+
+											<canvas id="myCanvas" width="450" height="600" 
+											style="border:3px solid"> 
+											HTML5 canvas tag is not  
+											supported by your browser. 
+										</canvas> 
+										<br>
+										<br>
+										<div id="canvas2">
+											<img src="image/P1010017.jpg" id="cropper"/>
+										</div>
+
+
+
+									</div>
+								</div>
+
+
+
+								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Upload image</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<p id="image_name"></p>
+												Image Name : <input type="text" class="form-control form-control-user" id="inputName"  placeholder="Name" required>
+												Image Coin : <input type="text" class="form-control form-control-user" id="inputCoin"  placeholder="Coin : 10" required>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+												<button type="button" onclick="upload_image()" class="btn btn-primary">Save changes</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+
+								<footer class="sticky-footer bg-white">
+									<div class="container my-auto">
+										<div class="copyright text-center my-auto">
+											<span>Copyright &copy; Jitpanu Tanthong</span>
+										</div>
+									</div>
+								</footer>
+
+							</div>
+
+						</div>
+
+					</body>
+
+					<script type="text/javascript">
+
+						var google_folder = '';
+
+						window.onload = function() {
+
+							const queryString = window.location.search;
+							const urlParams = new URLSearchParams(queryString);
+							const img_name = urlParams.get('image');
+							const username = urlParams.get('username');
+
+							// แสดงรูปจากโฟลเดอร์ image
+							document.getElementById("cropper").src = "image/"+img_name+".jpg";
+							document.getElementById("user_name").innerHTML = "Hi, "+username;
+
+							// ดึงข้อมูลมาว่า รูปนี้อยู่ในโฟลเดอร์ อะไร
+							var ref3 = firebase.database().ref('precrop/'+img_name);
+							ref3.on("value", function(snapshot2) {
+								var data = snapshot2.val();
+								google_folder = data.google_drive_image_folder;
+							});
+
+							var canvas = document.getElementById("myCanvas"); 
+							var contex = canvas.getContext("2d"); 
+							var img = document.getElementById("cropper"); 
+							cropp();
+
+							// ฟังก์ชัน Crop
+							function cropp(){
+								var cropper = new Croppr('#cropper', {
+								// onInitialize: (instance) => { console.log(instance); },
+								// onCropStart: (data) => { console.log('start', data); },
+								// onCropEnd: (data) => { console.log('end', data); },
+								minSize: [120, 90, 'px'],
+								// maxSize: [225, 300, 'px'],
+								// minSize: [225, 300, 'px'],
+								aspectRatio: 600/450,
+								// maxSize: [450, 600, 'px'],
+								// minSize: [450, 600, 'px'],
+								// autoCropArea: 1,
+								// onCropMove: (data) => { console.log('move', data); }
+
+								onCropEnd: function(value) {
+									// console.log(value);
+
+									// var w = window.innerWidth;
+									// var h = window.innerHeight;
+
+									// var canvas = document.getElementById('canvas2');
+									// var width = canvas.width;
+									// var height = canvas.height;
+
+									// console.log(w, h);
+									// console.log(canvas);
+
+									showCrop(value);
+									;
+
+
+								}
+
+								
+							});
+							}
+
+
+							
+
+							function showCrop(value) {
+
+								var canvas = document.getElementById('myCanvas');
+
+
+								canvas.width = 450;
+								canvas.height = 600;
+
+								var width = canvas.width;
+								var height = canvas.height;
+
+
+								console.log(width, height);
+							// document.getElementById("myCanvas").width = value.width;
+							// document.getElementById("myCanvas").height = value.height;
+							// console.log(value.x);
+							contex.drawImage(img, value.x, value.y,  
+								value.width, value.height, 0, 0, 450, 600); 
+
+						}
+
+
+
+					}
+
+
+
+					// กด Submit หลังจาก Crop ส่วนที่ต้องการ
+					function submit_image() {
+
+						const queryString = window.location.search;
+						const urlParams = new URLSearchParams(queryString);
+						const img_name = urlParams.get('image');
+						const username = urlParams.get('username');
+
+						// โชว์ modal โดยจะกำหนดชื่อภาพให้จากจำนวนภาพล่าสุด +1 และกำหนด coin เป็น 10 
+						$('#exampleModal').modal('show');
+
+						var leadsRef = firebase.database().ref('image/');
+						leadsRef.once("value",snapshot => {
+
+							var count = snapshot.numChildren() + 1;
+
+							var name = '';
+							if (count.toString().length == '1') {
+								name  = "0000" + count.toString();
+							}else if (count.toString().length == '2') {
+								name  = "000" + count.toString();
+							}else if (count.toString().length == '3') {
+								name  = "00" + count.toString();
+							}else if (count.toString().length == '4') {
+								name  = "0" + count.toString();
+							}else{
+								name = ''+count.toString();
+							}
+
+							const userData = snapshot.val();
+							console.log(userData);
+							console.log(count);
+							console.log(name);
+
+							document.getElementById("inputName").value = name;
+							document.getElementById("inputCoin").value = 10;
+
+						});
+
+					}
+
+
+					// กด Submit หลังจากกำหนดชื่อภาพ กับ coin แล้ว ระบบจะอัพขึ้นไปเก็บบน storage firebase
+					function upload_image(){
+
+						const queryString = window.location.search;
+						const urlParams = new URLSearchParams(queryString);
+						const img_name = urlParams.get('image');
+						const username = urlParams.get('username')
+
+						var coin = document.getElementById("inputCoin").value;  
+						var name = document.getElementById("inputName").value;  
+
+						// แก้ข้อมูลในดาต้าเบสว่ารูปนี้ Crop แล้ว
+						firebase.database().ref('precrop/'+img_name).update({
+							crop:'yes'
+						}, function(error) {
+							if (error) {
+							} else {
+
+								var canvas = document.getElementById("myCanvas").toDataURL("image/png");
+
+								var file = dataURItoBlob(canvas, 'image/png');
+
+								var storageRef = firebase.storage().ref();
+								var uploadTask = storageRef.child('images/img_' + name + ".jpg").put(file);
+
+								uploadTask.on('state_changed', function(snapshot){
+									var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+									console.log('Upload is ' + progress);
+									switch (snapshot.state) {
+										case firebase.storage.TaskState.PAUSED: 
+										console.log('Upload is paused');
+										break;
+										case firebase.storage.TaskState.RUNNING: 
+										console.log('Upload is running');
+										break;
+									}
+								}, function(error) {
+									alert(error);
+								}, function() {
+
+									var dt = new Date();
+
+									// เวลาที่อัพโหลด
+									var time = (`${
+										(dt.getMonth()+1).toString().padStart(2, '0')}/${
+											dt.getDate().toString().padStart(2, '0')}/${
+												dt.getFullYear().toString().padStart(4, '0')} ${
+													dt.getHours().toString().padStart(2, '0')}:${
+														dt.getMinutes().toString().padStart(2, '0')}:${
+															dt.getSeconds().toString().padStart(2, '0')}`
+															);
+
+
+
+									firebase.database().ref('image/' + "img_"+name).set({
+										upload: username,
+										coin:coin,
+										uploadtime:time
+									}, function(error) {
+										if (error) {
+										} else {
+
+											firebase.database().ref('measure/' + "img_"+name).set({
+												process: "no"
+											}, function(error) {
+												if (error) {
+												} else {
+
+													firebase.database().ref('ref/' + "img_"+name).set({
+														google_drive_image_folder:google_folder,
+														google_drive_image_no:img_name
+													}, function(error) {
+														if (error) {
+														} else {
+
+															alert(" - Upload Complete - ")
+															window.location.href = "crop.html?username="+username;
+														}
+													});
+
+												}
+											});
+										}
+									});
+
+
+								});
+
+							}
+						});
+
+
+						// แปลงข้อมูลรูปภาพเป็น Blob
+						function dataURItoBlob(asd, type) {
+							var byteString = atob(asd.split(',')[1]);
+
+							var mimeString = asd.split(',')[0].split(':')[1].split(';')[0]
+							var ab = new ArrayBuffer(byteString.length);
+							var ia = new Uint8Array(ab);
+							for (var i = 0; i < byteString.length; i++) {
+								ia[i] = byteString.charCodeAt(i);
+							}
+							var bb = new Blob([ab], { type: type });
+							return bb;
+						}
+
+					}
+
+
+
+
+				</script>
+
+				<!-- Bootstrap core JavaScript-->
+				<script src="vendor/jquery/jquery.min.js"></script>
+				<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+				<!-- Core plugin JavaScript-->
+				<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+				<!-- Custom scripts for all pages-->
+				<script src="js/sb-admin-2.min.js"></script>
+
+				<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+				<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+				<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+				<script>
+					var firebaseConfig = {
+						apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+						authDomain: "labeljpn.firebaseapp.com",
+						databaseURL: "https://labeljpn.firebaseio.com",
+						projectId: "labeljpn",
+						storageBucket: "labeljpn.appspot.com",
+						messagingSenderId: "478979409533",
+						appId: "1:478979409533:web:a286086924054873c6d314",
+						measurementId: "G-74RV1SGSWC"
+					};
+					firebase.initializeApp(firebaseConfig);
+				</script>
+
+
+
+				</html>

@@ -1,0 +1,21 @@
+{
+  "labels": [
+    "background",
+    "human",
+    "dog",
+    "cat",
+    "horse",
+    "flower",
+    "sea",
+    "boat"
+  ],
+  "imageURLs": [
+    "data/images/img_00005.jpg",
+    "data/images/img_00006.jpg"
+    
+  ],
+  "annotationURLs": [
+    "data/annotations/img_00005.png",
+    "data/annotations/img_00006.png"
+  ]
+}

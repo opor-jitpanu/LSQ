@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Admin</title>
+
+  <style type="text/css">
+    .card{
+      float: left;
+      width: 180px;
+      margin: 5px;
+    }
+  </style>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3"> Admin </div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Segmentation</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="vertify.html">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Vertify</span></a>
+          </li>
+
+          <hr class="sidebar-divider my-0">
+
+          <li class="nav-item">
+            <a class="nav-link" href="logout.html">
+              <i class="fas fa-fw fa-tachometer-alt"></i>
+              <span>Logout</span></a>
+            </li>
+
+
+
+
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+              <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+          </ul>
+          <!-- End of Sidebar -->
+
+          <!-- Content Wrapper -->
+          <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+
+
+
+
+
+
+              <!-- Begin Page Content -->
+              <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <br>
+                <h1 class="h3 mb-4 text-gray-800">Upload Image</h1>
+
+                <h1 class="h3 mb-4 text-gray-800" id="headerPage"></h1>
+
+
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Uploading</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <h1 class="h3 mb-4 text-gray-800" id="uploadProgress"></h1>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="col-lg-6">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputImage"
+                      aria-describedby="inputGroupFileAddon01">
+                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                  </div>
+                </div> -->
+                <br>
+                <div class="col-lg-6">
+                  <input type="text" class="form-control form-control-user" id="inputImageid"  placeholder="Image ID : 00001" required>
+                  <br>
+                  <button onclick="uploadOnclick()" class="btn btn-primary btn-icon-split">
+                    <span class="text">Creat Annotation</span>
+                  </button>
+
+                </div>
+                <br>
+
+
+
+
+
+              </div>
+              <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+              <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                  <span>Copyright &copy; Your Website 2019</span>
+                </div>
+              </div>
+            </footer>
+            <!-- End of Footer -->
+
+          </div>
+          <!-- End of Content Wrapper -->
+
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <!-- Scroll to Top Button-->
+
+
+
+
+
+        <script type="text/javascript">
+
+
+
+          window.onload = function() {
+
+
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const img_name = urlParams.get('image')
+
+            const username = urlParams.get('username')
+
+            // var username = sessionStorage.getItem("username");
+            sessionStorage.setItem("username", username);
+
+            if (!username) {
+              console.log("null");
+              alert("Please login");
+              window.location.href = "login.html";
+
+            }else{
+
+              console.log(username);
+              document.getElementById("inputImageid").value = img_name+'_'+username+'.png';
+
+              var dt = new Date();
+
+              var time = (`${
+                (dt.getMonth()+1).toString().padStart(2, '0')}/${
+                  dt.getDate().toString().padStart(2, '0')}/${
+                    dt.getFullYear().toString().padStart(4, '0')} ${
+                      dt.getHours().toString().padStart(2, '0')}:${
+                        dt.getMinutes().toString().padStart(2, '0')}:${
+                          dt.getSeconds().toString().padStart(2, '0')}`
+                          );
+
+              console.log(time);
+
+              uploadOnclick();
+            }
+
+
+
+          }
+
+
+
+
+
+          function uploadOnclick() {
+
+            var dt = new Date();
+
+            var time = (`${
+              (dt.getMonth()+1).toString().padStart(2, '0')}/${
+                dt.getDate().toString().padStart(2, '0')}/${
+                  dt.getFullYear().toString().padStart(4, '0')} ${
+                    dt.getHours().toString().padStart(2, '0')}:${
+                      dt.getMinutes().toString().padStart(2, '0')}:${
+                        dt.getSeconds().toString().padStart(2, '0')}`
+                        );
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const img_name = urlParams.get('image')
+            var username = sessionStorage.getItem("username");
+            if (!username) {
+              console.log("null");
+              alert("Please login");
+              window.location.href = "login.html";
+
+            }else{
+              console.log("Not null");
+            }
+
+
+            var image_id = document.getElementById("inputImageid").value;
+
+            var canvas = document.createElement("canvas");
+
+            canvas.width = 450;
+            canvas.height = 600;
+
+            var url = canvas.toDataURL();
+            console.log(url);
+
+            var file = dataURItoBlob(url, 'image/png');
+            console.log(file);
+
+
+            function dataURItoBlob(dataURI, type) {
+
+              var byteString = atob(dataURI.split(',')[1]);
+              var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+              var ab = new ArrayBuffer(byteString.length);
+              var ia = new Uint8Array(ab);
+              for (var i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+              }
+              var bb = new Blob([ab], { type: type });
+              return bb;
+            }
+
+
+
+
+
+            var storageRef = firebase.storage().ref();
+
+
+
+
+            var uploadTask = storageRef.child('annotation/img_' + img_name.substr(img_name.length - 5) +'/'+image_id).put(file);
+
+
+            $('#exampleModal').modal('show');
+            uploadTask.on('state_changed', function(snapshot){
+              var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              console.log('Upload is ' + progress+' %');
+              document.getElementById("uploadProgress").innerHTML = 'Upload is ' + progress+' %';
+              switch (snapshot.state) {
+                case firebase.storage.TaskState.PAUSED: 
+                console.log('Upload is paused');
+                break;
+                case firebase.storage.TaskState.RUNNING: 
+                console.log('Upload is running');
+                break;
+              }
+            }, function(error) {
+              alert(error);
+            }, function() {
+
+              firebase.database().ref('image/'+img_name+'/'+username).update({
+                time: time,
+                submit:"no"
+              }, function(error) {
+                if (error) {
+                } else {
+                  firebase.database().ref('user/'+username+'/annotation/'+img_name).update({
+                    time:time,
+                    status:'waiting',
+                    redeem:"no",
+                    approveby:"",
+                    approvetime:""
+                  }, function(error) {
+                    if (error) {
+                    } else {
+                      window.location.href = "segment/index.html?view=edit&id=0&image="+img_name;
+                    }
+                  });
+                }
+              });
+
+
+            });
+
+
+
+
+          }
+
+
+
+
+
+
+
+
+        </script>
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+        <script>
+          var firebaseConfig = {
+            apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+            authDomain: "labeljpn.firebaseapp.com",
+            databaseURL: "https://labeljpn.firebaseio.com",
+            projectId: "labeljpn",
+            storageBucket: "labeljpn.appspot.com",
+            messagingSenderId: "478979409533",
+            appId: "1:478979409533:web:a286086924054873c6d314",
+            measurementId: "G-74RV1SGSWC"
+          };
+          firebase.initializeApp(firebaseConfig);
+        </script>
+
+      </body>
+
+      </html>

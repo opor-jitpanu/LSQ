@@ -1,0 +1,16 @@
+{
+  "labels": [
+    "background",
+    "fat",
+    "meat",
+    "bone",
+    "other meat",
+    "spinal cord space"
+  ],
+  "imageURLs": [
+    "data/images/1.jpg"
+  ],
+  "annotationURLs": [
+    "data/annotations/1.png"
+  ]
+}

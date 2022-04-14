@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Vertify</title>
+
+	<style type="text/css">
+		.card{
+			float: left;
+			width: 180px;
+			margin: 5px;
+		}
+	</style>
+
+	<!-- Custom fonts for this template-->
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+	<!-- Custom styles for this template-->
+	<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<!-- Sidebar -->
+		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+			<!-- Sidebar - Brand -->
+			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin.html">
+				<!-- <div class="sidebar-brand-icon rotate-n-15">
+					<i class="fas fa-laugh-wink"></i>
+				</div> -->
+				<div class="sidebar-brand-text mx-3"> <p id="user_name"></p> </div>
+			</a>
+
+			<!-- Divider -->
+			<hr class="sidebar-divider my-0">
+
+
+			<li class="nav-item">
+				<a class="nav-link" href="admin.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span>Label</span></a>
+				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link" href="admin-vertify.html">
+						<i class="fas fa-fw fa-tachometer-alt"></i>
+						<span>Vertify</span></a>
+					</li>
+					<hr class="sidebar-divider my-0">
+					<li class="nav-item">
+						<a class="nav-link" href="logout.html">
+							<i class="fas fa-fw fa-tachometer-alt"></i>
+							<span>Logout</span></a>
+						</li>
+
+
+
+
+
+						<!-- Sidebar Toggler (Sidebar) -->
+						<div class="text-center d-none d-md-inline">
+							<button class="rounded-circle border-0" id="sidebarToggle"></button>
+						</div>
+
+					</ul>
+					<!-- End of Sidebar -->
+
+					<!-- Content Wrapper -->
+					<div id="content-wrapper" class="d-flex flex-column">
+
+						<!-- Main Content -->
+						<div id="content">
+
+
+
+							<!-- Begin Page Content -->
+							<div class="container-fluid">
+
+								<!-- Page Heading -->
+								<br>
+								<h1 class="h3 mb-4 text-gray-800">Vertify Image Page</h1>
+
+								<!-- h1 class="h4 mb-4 text-gray-800" id="headerPage"></h1> -->
+
+								<div class="col-lg-6">
+									<div class="input-group">
+                <!-- <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="inputImage"
+                  aria-describedby="inputGroupFileAddon01">
+                  <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+              </div> -->
+          </div>
+      </div>
+      <br>
+            <!-- <div class="col-lg-6">
+              <input type="text" class="form-control form-control-user" id="inputImageid"  placeholder="Image ID : 00001" required>
+              <br>
+              <button onclick="uploadOnclick()" class="btn btn-primary btn-icon-split">
+                <span class="text">Upload</span>
+              </button>
+
+          </div> -->
+          <br>
+
+
+
+
+          <div class="container">
+          	<div id="imageGallary">
+          	</div>
+
+          </div>
+
+          
+
+          <div class="container">
+          	<div id="imageGallary2">
+          	</div>
+
+          </div>
+
+
+      </div>
+      <!-- /.container-fluid -->
+
+  </div>
+  <!-- End of Main Content -->
+
+  <!-- Footer -->
+  <footer class="sticky-footer bg-white">
+  	<div class="container my-auto">
+  		<div class="copyright text-center my-auto">
+  			<span>Copyright &copy; Your Website 2019</span>
+  		</div>
+  	</div>
+  </footer>
+  <!-- End of Footer -->
+
+</div>
+<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+
+
+
+
+
+<script type="text/javascript">
+	var opacity = '1';
+	window.onload = function() {
+		var user_id = sessionStorage.getItem("user_id");
+		// document.getElementById("headerPage").innerHTML = "Username : "+sessionStorage.getItem("user_id");
+		document.getElementById("user_name").innerHTML = "Hi, "+sessionStorage.getItem("user_id");
+
+		var i;
+		for (i = 1; i < 11; i++) {
+			var name = '';
+			if (i.toString().length == '1') {
+				name  = "img_0000" + i.toString();
+			}else if (i.toString().length == '2') {
+				name  = "img_000" + i.toString();
+			}else if (i.toString().length == '3') {
+				name  = "img_00" + i.toString();
+			}else if (i.toString().length == '4') {
+				name  = "img_0" + i.toString();
+			}else{
+				name = 'img_'+i.toString();
+			}
+
+
+			var storageRef = firebase.storage().ref("images");
+			console.log(name);
+			storageRef.child(name+".jpg").getDownloadURL().then(function(url) {
+
+				console.log(url);
+
+				var img_name = url.substring(
+					url.lastIndexOf("F") + 1, 
+					url.lastIndexOf(".jpg")
+					);
+
+				var ref = firebase.database().ref('annotation/'+img_name);
+				var ref2 = firebase.database().ref('vertify/'+img_name);
+
+				ref.on("value", function(snapshot) {
+
+					var image = snapshot.val();
+					var str = image.name;
+					var res = str.split("-");
+					if (res == '') {
+						res = '';
+					}
+
+					ref2.on("value", function(snapshot) {
+
+						var image2 = snapshot.val();
+						var str2 = image2.name;
+						var res2 = str2.split("-");
+						console.log(res2 == '');
+						if (res2 == '') {
+							res2 = '';
+						}
+
+						console.log(res2.length);
+
+
+						if (res2.includes(user_id)) {
+							console.log('MEE');
+							opacity = '0.3';
+							var div = document.getElementById('imageGallary2');
+						}else{
+							opacity = '1';
+							var div = document.getElementById('imageGallary');
+						}
+
+
+
+						div.innerHTML +=  '<div style="opacity: '+opacity+';" class="card shadow mb-4"><div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary"><a target="_blank" href="image_select_vertify/?image='+img_name+'&view=index"'+img_name+'</h6></div><div class="card-body"> <img src="'+url+'" alt="Cinque Terre" width="100%" ></a>'+'<div class="mb-1 small">Vertify : '+res2.length+'/5</div><div class="progress progress-sm mb-2"><div class="progress-bar" role="progressbar" style="width: '+(res2.length)*20+'%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>'+'</a></div></div>'+'';
+
+
+						// div.innerHTML +=  '<div style="opacity: '+opacity+';" class="card shadow mb-4"><div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary"><a target="_blank" href="image_vertify_select.html?image='+img_name+'">'+img_name+'</h6></div><div class="card-body"> <img src="'+url+'" alt="Cinque Terre" width="100%" ></a>'+'<div class="mb-1 small">Vertify : '+res2.length+'/5</div><div class="progress progress-sm mb-2"><div class="progress-bar" role="progressbar" style="width: '+(res2.length)*20+'%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>'+'</a></div></div>'+'';
+
+
+					}, function (error) {
+						console.log("Error: " + error.code);
+					});
+
+				}, function (error) {
+					console.log("Error: " + error.code);
+				});
+
+			}).catch(function(error) {
+
+			});
+
+
+
+		}
+	};
+
+
+
+
+	function uploadOnclick() {
+		var user_id = sessionStorage.getItem("user_id");
+		if (!user_id) {
+			console.log("null");
+			alert("Please login");
+			window.location.href = "login.html";
+
+		}else{
+			console.log("Not null");
+		}
+
+
+		var image_id = document.getElementById("inputImageid").value;
+
+		var file = document.getElementById('inputImage').files[0];
+		var storageRef = firebase.storage().ref();
+
+
+		var isValid = /\.jpe?g$/i.test(file.name);
+		if (!isValid) {
+			alert('Only jpg files allowed!');
+		}else{
+
+			var uploadTask = storageRef.child('images/img_' + image_id + ".jpg").put(file);
+
+
+
+			uploadTask.on('state_changed', function(snapshot){
+				var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				console.log('Upload is ' + progress);
+				switch (snapshot.state) {
+					case firebase.storage.TaskState.PAUSED: 
+					console.log('Upload is paused');
+					break;
+					case firebase.storage.TaskState.RUNNING: 
+					console.log('Upload is running');
+					break;
+				}
+			}, function(error) {
+				alert(error);
+			}, function() {
+				alert(" - Upload Complete - ")
+          // creatAnnotaion(image_id, user_id);
+          window.location.href = "admin_data.html?image="+image_id;
+
+          
+      });
+
+		}
+
+
+	}
+
+
+
+
+
+
+
+
+</script>
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+<script>
+	var firebaseConfig = {
+		apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+		authDomain: "labeljpn.firebaseapp.com",
+		databaseURL: "https://labeljpn.firebaseio.com",
+		projectId: "labeljpn",
+		storageBucket: "labeljpn.appspot.com",
+		messagingSenderId: "478979409533",
+		appId: "1:478979409533:web:a286086924054873c6d314",
+		measurementId: "G-74RV1SGSWC"
+	};
+	firebase.initializeApp(firebaseConfig);
+</script>
+
+</body>
+
+</html>

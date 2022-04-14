@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+ <script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+    authDomain: "labeljpn.firebaseapp.com",
+    databaseURL: "https://labeljpn.firebaseio.com",
+    projectId: "labeljpn",
+    storageBucket: "labeljpn.appspot.com",
+    messagingSenderId: "478979409533",
+    appId: "1:478979409533:web:a286086924054873c6d314",
+    measurementId: "G-74RV1SGSWC"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+<title>Segmentation</title>
+<link href="css/main.css" rel="stylesheet" type="text/css">
+<script data-main="js/main.js" src="js/require.js"></script>
+
+
+    <!-- <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+    <script src="js/sb-admin-2.min.js"></script> -->
+
+
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <div id="test123">
+    </div>
+    <div id="test">
+    </div>
+
+    <div id="wrapper">
+
+      <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <br>
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admins.html">
+          <div class="sidebar-brand-text mx-3"> <p id="user_name"></p> </div>
+        </a>
+
+        <hr class="sidebar-divider my-0">
+
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="../label.html">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Segmentation</span></a>
+          </li>
+          
+          <li class="nav-item active">
+            <a class="nav-link" href="../vertify.html">
+              <i class="fas fa-fw fa-tachometer-alt"></i>
+              <span>Verify</span></a>
+            </li>
+            <hr class="sidebar-divider my-0">
+            <li class="nav-item">
+              <a class="nav-link" href="../logout.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Logout</span></a>
+              </li>
+
+              <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+              </div>
+
+            </ul>
+
+            <div id="content-wrapper" class="d-flex flex-column">
+
+              <div id="content">
+
+                <div class="container-fluid">
+
+                  <br>
+                  <h1 class="h3 mb-4 text-gray-800" id="headerPage">Select Image to Verify</h1>
+
+
+
+
+                  
+
+
+
+                  <div id="lc"></div>
+
+
+
+
+
+
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </body>
+
+        <script type="text/javascript">
+          window.onload = function() {
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const username = urlParams.get('username');
+            
+            document.getElementById("user_name").innerHTML = "Hi, "+username;
+
+            sessionStorage.setItem("username", username);
+          };
+        </script>
+
+
+
+        </html>

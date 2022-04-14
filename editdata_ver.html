@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EditDataBase</title>
+</head>
+<body>
+
+
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+<script>
+	var firebaseConfig = {
+		apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+		authDomain: "labeljpn.firebaseapp.com",
+		databaseURL: "https://labeljpn.firebaseio.com",
+		projectId: "labeljpn",
+		storageBucket: "labeljpn.appspot.com",
+		messagingSenderId: "478979409533",
+		appId: "1:478979409533:web:a286086924054873c6d314",
+		measurementId: "G-74RV1SGSWC"
+	};
+	firebase.initializeApp(firebaseConfig);
+</script>
+
+
+
+<script type="text/javascript">
+	window.onload = function() {
+
+
+		const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
+		const data = urlParams.get('data');
+		const image = urlParams.get('image');
+		console.log(data);
+		console.log(image);
+
+		
+
+		firebase.database().ref('vertify/' + image).set({
+			name: data
+		}, function(error) {
+			if (error) {
+			} else {
+				window.location.href = "admin-vertify.html";
+				
+			}
+		});
+
+
+	}
+
+
+</script>
+
+
+</html>

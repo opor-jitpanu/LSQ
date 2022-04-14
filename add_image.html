@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Admin</title>
+
+	<style type="text/css">
+		.card{
+			float: left;
+			width: 180px;
+			margin: 5px;
+		}
+	</style>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.1/xlsx.full.min.js"></script>
+
+	<!-- Custom fonts for this template-->
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+	<!-- Custom styles for this template-->
+	<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<!-- Sidebar -->
+		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+			<!-- Sidebar - Brand -->
+			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin.html">
+
+				<div class="sidebar-brand-text mx-3" id="user_name">  </div>
+			</a>
+
+			<!-- Divider -->
+			<hr class="sidebar-divider my-0">
+
+			<!-- Nav Item - Dashboard -->
+			<li class="nav-item">
+				<a class="nav-link" href="admin.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span>Admin</span></a>
+				</li>
+
+
+
+				<li class="nav-item active">
+					<a class="nav-link" href="add_image.html">
+						<i class="fas fa-fw fa-tachometer-alt"></i>
+						<span>Upload Image</span></a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="admin_image.html">
+							<i class="fas fa-fw fa-tachometer-alt"></i>
+							<span>Image Information</span></a>
+						</li>
+
+						<hr class="sidebar-divider my-0">
+						<li class="nav-item">
+							<a class="nav-link" href="logout.html">
+								<i class="fas fa-fw fa-tachometer-alt"></i>
+								<span>Logout</span></a>
+							</li>
+
+
+
+
+
+							<!-- Sidebar Toggler (Sidebar) -->
+							<div class="text-center d-none d-md-inline">
+								<button class="rounded-circle border-0" id="sidebarToggle"></button>
+							</div>
+
+						</ul>
+						<!-- End of Sidebar -->
+
+						<!-- Content Wrapper -->
+						<div id="content-wrapper" class="d-flex flex-column">
+
+							<!-- Main Content -->
+							<div id="content">
+
+
+
+								<!-- Begin Page Content -->
+								<div class="container-fluid">
+
+									<!-- Page Heading -->
+									<br>
+									<h1 class="h3 mb-4 text-gray-800">Upload Image</h1>
+
+									<h1 class="h3 mb-4 text-gray-800" id="headerPage"></h1>
+
+									<div class="col-lg-6">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+											</div>
+											<div class="custom-file">
+												<input type="file" class="custom-file-input" id="inputImage"
+												aria-describedby="inputGroupFileAddon01" multiple>
+												<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+											</div>
+										</div>
+									</div>
+									<br>
+									<div class="col-lg-6">
+										Image ID<input type="text" class="form-control form-control-user" id="inputImageid"  placeholder="Image ID : 00001" required>
+										<br>
+
+										Coin<input type="text" class="form-control form-control-user" id="inputCoin"  placeholder="Coin : 0.1" required>
+										<br>
+										<button onclick="uploadOnclick()" class="btn btn-primary btn-icon-split">
+											<span class="text">Upload</span>
+										</button>
+
+									</div>
+									<br>
+									<hr class="sidebar-divider my-0">
+									<br>
+
+
+									<h1 class="h3 mb-4 text-gray-800">Upload Image By Excel</h1>
+
+
+
+
+									<div class="col-lg-6">
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="">Upload</span>
+											</div>
+											<div class="custom-file">
+												<input type="file" class="custom-file-input" id="fileUpload" accept=".xls,.xlsx"
+												aria-describedby="inputGroupFileAddon01" multiple>
+												<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+											</div>
+										</div>
+									</div>
+
+
+
+									<p id = "GFG_UP" style =  
+									"font-size: 15px; font-weight: bold;">  
+								</p> 
+
+
+
+								<p id = "GFG_DOWN" style =  
+								"color:green; font-size: 20px; font-weight: bold;">  
+							</p> 
+
+							<div id="test2"></div>
+
+
+
+							<br>
+							<div class="col-lg-6">
+								<button type="button" class="btn btn-primary btn-icon-split" id="uploadEcel"><span class="text">Upload</span></button>
+								<pre id="jsonData"></pre>
+							</div>
+
+
+
+							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Please wait</h5>
+
+										</div>
+										<div class="modal-body">
+											<h1 class="h3 mb-4 text-gray-800" id="uploadProgress"></h1>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+							<br>
+							<hr class="sidebar-divider my-0">
+							<br>
+
+							<h1 class="h3 mb-4 text-gray-800">Upload Label Image</h1>
+
+							<div class="col-lg-6">
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
+									</div>
+									<div class="custom-file">
+										<input type="file" class="custom-file-input" id="inputImage2"
+										aria-describedby="inputGroupFileAddon01" multiple>
+										<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+									</div>
+								</div>
+							</div>
+							<br>
+							<div class="col-lg-6">
+								Image ID<input type="text" class="form-control form-control-user" id="inputImageid2"  placeholder="Image ID : 00001" required>
+								<br>
+
+
+								<button onclick="uploadOnclick2()" class="btn btn-primary btn-icon-split">
+									<span class="text">Upload</span>
+								</button>
+
+							</div>
+							<br>
+
+
+
+
+
+						</div>
+						<!-- /.container-fluid -->
+
+					</div>
+					<!-- End of Main Content -->
+
+					<!-- Footer -->
+					<footer class="sticky-footer bg-white">
+						<div class="container my-auto">
+							<div class="copyright text-center my-auto">
+								<span>Copyright &copy; Your Website 2019</span>
+							</div>
+						</div>
+					</footer>
+					<!-- End of Footer -->
+
+				</div>
+				<!-- End of Content Wrapper -->
+
+			</div>
+			<!-- End of Page Wrapper -->
+
+			<!-- Scroll to Top Button-->
+
+
+
+
+
+			<script type="text/javascript">
+
+
+
+				window.onload = function() {
+
+
+					$('#exampleModal').modal('show');
+
+					document.getElementById("user_name").innerHTML = "Hi, "+sessionStorage.getItem("username");
+
+					var leadsRef = firebase.database().ref('image/');
+					leadsRef.once("value",snapshot => {
+
+						var count = snapshot.numChildren() + 1;
+
+						var name = '';
+						if (count.toString().length == '1') {
+							name  = "0000" + count.toString();
+						}else if (count.toString().length == '2') {
+							name  = "000" + count.toString();
+						}else if (count.toString().length == '3') {
+							name  = "00" + count.toString();
+						}else if (count.toString().length == '4') {
+							name  = "0" + count.toString();
+						}else{
+							name = ''+count.toString();
+						}
+
+						const userData = snapshot.val();
+						console.log(userData);
+						console.log(count);
+						console.log(name);
+
+						document.getElementById("inputImageid").value = name;
+						document.getElementById("inputCoin").value = "0.1";
+						$('#exampleModal').modal('hide');
+
+					});
+
+				}
+
+
+
+
+
+				function uploadOnclick() {
+					var username = sessionStorage.getItem("username");
+					if (!username) {
+						console.log("null");
+						alert("Please login");
+						window.location.href = "login.html";
+
+					}else{
+						console.log("You r login");
+					}
+
+					var coin = document.getElementById("inputCoin").value;
+					var image_id = document.getElementById("inputImageid").value;
+
+					var file_count = document.getElementById('inputImage').files.length;
+
+
+					var storageRef = firebase.storage().ref();
+
+
+
+
+
+
+
+					for (var i = 0; i < file_count; i++) {
+
+
+						var count2 = i+parseInt(image_id);
+
+						if (count2.toString().length == '1') {
+							name  = "0000" + count2.toString();
+						}else if (count2.toString().length == '2') {
+							name  = "000" + count2.toString();
+						}else if (count2.toString().length == '3') {
+							name  = "00" + count2.toString();
+						}else if (count2.toString().length == '4') {
+							name  = "0" + count2.toString();
+						}else{
+							name = ''+count2.toString();
+						}
+
+						var file = document.getElementById('inputImage').files[i];
+						var uploadTask = storageRef.child('images/img_' + name + ".jpg").put(file);
+
+						uploadTask.on('state_changed', function(snapshot){
+							var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+							console.log('Upload is ' + progress);
+							switch (snapshot.state) {
+								case firebase.storage.TaskState.PAUSED: 
+								console.log('Upload is paused');
+								break;
+								case firebase.storage.TaskState.RUNNING: 
+								console.log('Upload is running');
+								break;
+							}
+						}, function(error) {
+							alert(error);
+						}, function() {
+
+
+							if (file_count == i) {
+								alert(" - Upload Complete - ")
+								window.location.href = "add_image_insert_data.html?image="+image_id+"&loop="+file_count+'&coin='+coin;
+							}
+
+						});
+
+					}
+
+				}
+
+
+
+				function uploadOnclick2() {
+
+					var username = sessionStorage.getItem("username");
+					if (!username) {
+						console.log("null");
+						alert("Please login");
+						window.location.href = "login.html";
+
+					}else{
+						console.log("You r login");
+					}
+
+					var coin = document.getElementById("inputCoin").value;
+					var image_id = document.getElementById("inputImageid").value;
+
+					var file_count = document.getElementById('inputImage').files.length;
+
+
+					var storageRef = firebase.storage().ref();
+
+
+
+
+
+
+
+					for (var i = 0; i < file_count; i++) {
+
+
+						var count2 = i+parseInt(image_id);
+
+						if (count2.toString().length == '1') {
+							name  = "0000" + count2.toString();
+						}else if (count2.toString().length == '2') {
+							name  = "000" + count2.toString();
+						}else if (count2.toString().length == '3') {
+							name  = "00" + count2.toString();
+						}else if (count2.toString().length == '4') {
+							name  = "0" + count2.toString();
+						}else{
+							name = ''+count2.toString();
+						}
+
+						var file = document.getElementById('inputImage').files[i];
+						var uploadTask = storageRef.child('images/img_' + name + ".jpg").put(file);
+
+						uploadTask.on('state_changed', function(snapshot){
+							var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+							console.log('Upload is ' + progress);
+							switch (snapshot.state) {
+								case firebase.storage.TaskState.PAUSED: 
+								console.log('Upload is paused');
+								break;
+								case firebase.storage.TaskState.RUNNING: 
+								console.log('Upload is running');
+								break;
+							}
+						}, function(error) {
+							alert(error);
+						}, function() {
+
+
+							if (file_count == i) {
+								alert(" - Upload Complete - ")
+								window.location.href = "add_image_insert_data.html?image="+image_id+"&loop="+file_count+'&coin='+coin;
+							}
+
+						});
+
+					}
+					
+				}
+
+
+
+
+				console.log('test');
+				var selectedFile;
+				document.getElementById("fileUpload").addEventListener("change", function (event) {
+					selectedFile = event.target.files[0];
+				});
+
+
+				document.getElementById("uploadEcel").addEventListener("click", function () {
+					if (selectedFile) {
+						var fileReader = new FileReader();
+						fileReader.onload = function (event) {
+							var data = event.target.result;
+							var workbook = XLSX.read(data,{
+								type:"binary"
+							});
+							workbook.SheetNames.forEach(sheet => {
+
+								let rowObject = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
+
+
+								var username = sessionStorage.getItem("username");
+								
+								
+								
+								
+
+								for (var i = 0; i < rowObject.length; i++) {
+									console.log(rowObject[i].imagename);
+									console.log(rowObject[i].path);
+									console.log(rowObject[i].coin);
+									console.log(rowObject[i].task);
+									console.log(rowObject.length);
+
+									addData(rowObject[i].imagename, rowObject[i].coin, rowObject[i].path, rowObject.length);
+
+
+
+								}
+
+
+
+								
+
+
+
+							});
+						};
+						fileReader.readAsBinaryString(selectedFile);
+
+					}
+				});
+
+
+
+
+				function addData(img, coin, path, count) {
+
+					var url = path+"/"+img+".jpg";
+
+					var count2 = 1;
+
+					var xhr = new XMLHttpRequest();
+					xhr.open('GET', url, true);
+					xhr.responseType = 'blob';
+					xhr.onload = function(e) {
+						if (this.status == 200) {
+							var myBlob = this.response;
+							console.log(myBlob);
+
+
+							var storageRef = firebase.storage().ref();
+
+							var uploadTask = storageRef.child("images/"+img+".jpg").put(myBlob);
+
+							uploadTask.on('state_changed', function(snapshot){
+								var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+								console.log('Upload is ' + progress);
+								switch (snapshot.state) {
+									case firebase.storage.TaskState.PAUSED: 
+									console.log('Upload is paused');
+									break;
+									case firebase.storage.TaskState.RUNNING: 
+									console.log('Upload is running');
+									break;
+								}
+							}, function(error) {
+								alert(error);
+							}, function() {
+
+
+
+								var dt = new Date();
+
+								var time = (`${
+									(dt.getMonth()+1).toString().padStart(2, '0')}/${
+										dt.getDate().toString().padStart(2, '0')}/${
+											dt.getFullYear().toString().padStart(4, '0')} ${
+												dt.getHours().toString().padStart(2, '0')}:${
+													dt.getMinutes().toString().padStart(2, '0')}:${
+														dt.getSeconds().toString().padStart(2, '0')}`
+														);
+
+
+								var username = sessionStorage.getItem("username");
+								firebase.database().ref('image/' + img).set({
+									upload: username,
+									coin:coin,
+									uploadtime:time
+								}, function(error) {
+									if (error) {
+									} else {
+
+										console.log(count, count2);
+										if (count2 = count) {
+											alert("Upload Complete");
+										}
+
+									}
+								});
+
+
+
+							});
+
+						}
+					};
+					xhr.send();
+					
+				}
+
+
+
+
+
+
+			</script>
+
+			<!-- Bootstrap core JavaScript-->
+			<script src="vendor/jquery/jquery.min.js"></script>
+			<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+			<!-- Core plugin JavaScript-->
+			<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+			<!-- Custom scripts for all pages-->
+			<script src="js/sb-admin-2.min.js"></script>
+
+			<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+			<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+			<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+			<script>
+				var firebaseConfig = {
+					apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+					authDomain: "labeljpn.firebaseapp.com",
+					databaseURL: "https://labeljpn.firebaseio.com",
+					projectId: "labeljpn",
+					storageBucket: "labeljpn.appspot.com",
+					messagingSenderId: "478979409533",
+					appId: "1:478979409533:web:a286086924054873c6d314",
+					measurementId: "G-74RV1SGSWC"
+				};
+				firebase.initializeApp(firebaseConfig);
+			</script>
+
+		</body>
+
+		</html>

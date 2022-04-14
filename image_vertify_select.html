@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Admin</title>
+
+  <style type="text/css">
+    .card{
+      float: left;
+      width: 180px;
+      margin: 5px;
+    }
+  </style>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admins.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3"> Admin </div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="admin.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+        </li>
+
+
+
+        
+
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+      </ul>
+      <!-- End of Sidebar -->
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <br>
+            <h1 class="h3 mb-4 text-gray-800" id="headerPage"></h1>
+
+            <!-- <div class="col-lg-6" id="addImage">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputImage"
+                aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+              </div>
+
+              <br>
+              <br>
+              <button onclick="uploadOnclick()" class="btn btn-primary btn-icon-split">
+                <span class="text"> + New annotaion</span>
+              </button>
+              <br><br>
+
+            </div> -->
+            <h4 id="user_vertify"></h4>
+
+
+
+            <div id="imageGallary">
+            </div>
+
+
+
+
+
+
+
+
+
+          </div>
+          <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+
+        <!-- End of Footer -->
+
+      </div>
+      <!-- End of Content Wrapper -->
+
+    </div>
+
+
+
+
+
+    <script type="text/javascript">
+
+      var opacity = '1';
+      window.onload = function() {
+
+
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const img_name = urlParams.get('image')
+
+        document.getElementById("headerPage").innerHTML = "Image Name : "+img_name;
+
+
+
+
+        var ref = firebase.database().ref('annotation/'+img_name);
+
+        ref.on("value", function(snapshot) {
+
+          var image = snapshot.val();
+          var str = image.name;
+          var res = str.split("-");
+          console.log(res.length);
+
+
+          console.log(res);
+          var i;
+          for (i = 0; i < res.length; i++) {
+            // for (i = 0; i < 5; i++) {
+
+              var user = res[i];
+            // var user = ['u001','u002','u003','u004', 'u005']
+
+            var storageRef = firebase.storage().ref("annotation/"+img_name);
+
+
+
+
+
+            storageRef.child(img_name+'_'+res[i]+".png").getDownloadURL().then(function(url) {
+                // storageRef.child(img_name+'_'+user[i]+".png").getDownloadURL().then(function(url) {
+
+
+                  var div = document.getElementById('imageGallary');
+
+
+
+
+                  var img_name_user = url.substring(
+                    url.lastIndexOf("img_") + 1, 
+                    url.lastIndexOf(".png")
+                    );
+
+
+                  var user_id = sessionStorage.getItem("user_id");
+                  var img_name_user2 = img_name_user.substr(img_name_user.length - 3);
+                  var img_name_user3 = img_name_user.substr(img_name_user.length - 4);
+
+
+                  if (img_name_user3 == user_id) {
+                    // var x = document.getElementById("addImage");
+                    // x.style.display = "none";
+                  }
+
+
+
+
+                  var ref2 = firebase.database().ref('vertify/'+img_name);
+
+                  ref2.on("value", function(snapshot) {
+
+                    var image2 = snapshot.val();
+                    var str2 = image2.name;
+                    var res2 = str2.split("-");
+
+                    document.getElementById("user_vertify").innerHTML = "User Vertify : "+str2+"    You are "+user_id;
+
+
+                    console.log(img_name_user3);
+
+                    console.log(user_id);
+                    // if (user_id.includes(img_name_user3)) {
+                    //   alert("You are vertify this image!");
+                    //   opacity = '0.3';
+                    //   // window.location.href = "admin-vertify.html";
+                    // }
+
+                    if (res2.includes(img_name_user3)) {
+                      opacity = '0.3';
+                    }else{
+
+                      opacity = '1';
+                    }
+                    
+                    
+
+
+
+                    div.innerHTML +=  '<div style="opacity: '+opacity+';" class="card shadow mb-4"><div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary"><a target="_blank" href="vertify/index.html?view=edit&id=0&image='+img_name+'&user_id='+img_name_user2+'">'+'Create by : '+img_name_user2+'</h6></div><div class="card-body"> <img src="'+url+'" alt="Cinque Terre" width="100%" ></a></div></div>'
+
+
+
+                  }, function (error) {
+                    console.log("Error: " + error.code);
+                  });
+
+
+
+
+
+
+
+
+                  
+
+                }).catch(function(error) {
+                  console.log("Error: " + error.code);
+                });
+
+              }
+
+
+
+            }, function (error) {
+              console.log("Error: " + error.code);
+            });
+
+
+
+
+
+
+
+      };
+
+
+
+
+
+
+
+
+
+
+
+
+      function uploadOnclick() {
+        var user_id = sessionStorage.getItem("user_id");
+        if (!user_id) {
+          console.log("null");
+          alert("Please login");
+          window.location.href = "login.html";
+
+        }else{
+          console.log("Not null");
+        }
+
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const img_name = urlParams.get('image')
+
+
+
+        var file = document.getElementById('inputImage').files[0];
+        var storageRef = firebase.storage().ref();
+
+
+
+
+        var uploadTask = storageRef.child('annotation/' + img_name +'/'+ img_name+'_'+user_id+".png").put(file);
+
+
+
+        uploadTask.on('state_changed', function(snapshot){
+          var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress);
+          switch (snapshot.state) {
+            case firebase.storage.TaskState.PAUSED: 
+            console.log('Upload is paused');
+            break;
+            case firebase.storage.TaskState.RUNNING: 
+            console.log('Upload is running');
+            break;
+          }
+        }, function(error) {
+          alert(error);
+        }, function() {
+          alert(" - Upload Complete - ")
+          editAnnotationDatabase(user_id);
+
+        });
+
+
+
+
+      }
+
+
+
+
+      function editAnnotationDatabase(user_id) {
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const img_name = urlParams.get('image')
+
+
+
+        var ref = firebase.database().ref('annotation/'+img_name);
+
+        ref.on("value", function(snapshot) {
+
+          var image = snapshot.val();
+          var new_data = image.name+'-'+user_id;
+          console.log(new_data);
+          window.location.href = "editdata.html?data="+new_data+'&image='+img_name;
+
+
+        }, function (error) {
+          console.log("Error: " + error.code);
+        });
+
+
+
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+        authDomain: "labeljpn.firebaseapp.com",
+        databaseURL: "https://labeljpn.firebaseio.com",
+        projectId: "labeljpn",
+        storageBucket: "labeljpn.appspot.com",
+        messagingSenderId: "478979409533",
+        appId: "1:478979409533:web:a286086924054873c6d314",
+        measurementId: "G-74RV1SGSWC"
+      };
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+  </body>
+
+  </html>

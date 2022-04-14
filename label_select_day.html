@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Label Page</title>
+
+	<style type="text/css">
+		.card{
+			float: left;
+			width: 180px;
+			margin: 5px;
+		}
+
+
+	</style>
+
+
+	<style type="text/css">
+		.inlineBTN{
+			display: inline-block;
+		}
+		.sideRight{
+			float:right;
+		}
+		.sideLeft{
+			float:left;
+		}
+
+	</style>
+
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+	<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+	<div id="wrapper">
+
+		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+			<br>
+			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+				<div class="sidebar-brand-text mx-3"> <p id="user_name"></p> </div>
+			</a>
+
+			<hr class="sidebar-divider my-0">
+			<li class="nav-item active">
+				<a class="nav-link" href="label.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i>
+					<span>Segmentation</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="vertify.html">
+						<i class="fas fa-fw fa-tachometer-alt"></i>
+						<span>Verify</span></a>
+					</li>
+
+					<hr class="sidebar-divider my-0">
+
+					<li class="nav-item">
+						<a class="nav-link" href="userinfo2.html">
+							<i class="fas fa-fw fa-tachometer-alt"></i>
+							<span>User Information</span></a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" href="measure.html">
+								<i class="fas fa-fw fa-tachometer-alt"></i>
+								<span>Measure</span></a>
+							</li>
+
+
+							<li class="nav-item">
+								<a class="nav-link" href="logout.html">
+									<i class="fas fa-fw fa-tachometer-alt"></i>
+									<span>Logout</span></a>
+								</li>
+
+
+								<hr class="sidebar-divider my-0">
+								<br>
+
+								<div class="text-center d-none d-md-inline">
+									<button class="rounded-circle border-0" id="sidebarToggle"></button>
+								</div>
+							</ul>
+
+							<div id="content-wrapper" class="d-flex flex-column">
+								<div id="content">
+									<div class="container-fluid">
+										<br>
+										<h1 class="h3 mb-4 text-gray-800">Segmentation Page</h1>
+										<div class="col-lg-6">
+											<div class="input-group">
+											</div>
+										</div>
+									
+										<h5 id="day"></h5>
+										<input type="button" class="btn btn-primary" onclick="location.href='label.html';" value="Back" />
+										<br>
+
+										<!-- รูปที่ยังไม่ได้ทำ -->
+										<div id="imageGallary1">
+										</div>
+
+										<!-- รูปที่ทำแล้ว -->
+										<div id="imageGallary2">
+										</div>
+
+									</div>
+								</div>
+								<footer class="sticky-footer bg-white">
+									<div class="container my-auto">
+										<div class="copyright text-center my-auto">
+											<span>Copyright &copy; Jitpanu Tanthong</span>
+										</div>
+									</div>
+								</footer>
+
+							</div>
+
+						</div>
+
+					</body>
+
+					<script type="text/javascript">
+
+						var div_new = document.getElementById('imageGallary1');
+						var div_old = document.getElementById('imageGallary2');
+
+						var start = 0;
+						var stop = 0;
+
+						window.onload = function() {
+
+							var username = sessionStorage.getItem("username");
+							document.getElementById("user_name").innerHTML = "Hi, "+sessionStorage.getItem("username");
+
+							const queryString = window.location.search;
+							const urlParams = new URLSearchParams(queryString);
+
+							// เริ่มที่รูปหมายเลข
+							start = urlParams.get('start');
+							// จบที่รูปหมายเลข
+							stop = urlParams.get('stop');
+
+							day =  urlParams.get('day');
+							document.getElementById('day').innerHTML = day;
+
+
+							var leadsRef = firebase.database().ref('user/'+username+'/'+'annotation');
+							leadsRef.once("value",snapshot => {
+
+								if (snapshot.exists()){
+									const userData = snapshot.val();
+									var img = Object.keys(userData);
+									drawImage(img);
+
+								}else{
+									var img = '';
+									drawImage(img)
+								}
+							});
+
+							
+						};
+
+						function getImageName(url) {
+							// หาชื่อของรูปภาพจากURL
+							var img_name = url.substring(
+								url.lastIndexOf("F") + 1, 
+								url.lastIndexOf(".jpg")
+								);
+							return img_name;
+						}
+
+						function drawImage(img) {
+							// แสดงรูปภาพ
+							var i;
+							for (i = start; i <= stop; i++) {
+								var name = '';
+								// ชื่อรูป img_หมายเลข
+								if (i.toString().length == '1') {
+									name  = "img_0000" + i.toString();
+								}else if (i.toString().length == '2') {
+									name  = "img_000" + i.toString();
+								}else if (i.toString().length == '3') {
+									name  = "img_00" + i.toString();
+								}else if (i.toString().length == '4') {
+									name  = "img_0" + i.toString();
+								}else{
+									name = 'img_'+i.toString();
+								}
+
+
+								var username = sessionStorage.getItem("username");
+								var storageRef = firebase.storage().ref("images/");
+
+								// หา url จากรูป
+								storageRef.child(name+".jpg").getDownloadURL().then(function(url) {
+
+									var ref = firebase.database().ref('image/'+getImageName(url)+'/');
+									ref.on("value", function(snapshot) {
+										var count = 0;
+										if (snapshot.numChildren() == 0) { count = 0;}
+										else{count = snapshot.numChildren() - 1;}
+										var coin = snapshot.child("coin").val();
+
+										var ref3 = firebase.database().ref('image/'+getImageName(url));
+										ref3.child(username).once("value",snapshot => {
+											if (snapshot.exists()){
+												const userData = snapshot.val();
+
+												var ref2 = firebase.database().ref('image/'+getImageName(url)+'/'+username);
+												ref2.on("value", function(snapshot) {
+													var data = snapshot.val();
+													// ถ้ายังไม่ได้ทำรูปนี้
+													if (data.submit == "no") {
+
+														div_new.innerHTML +=  '<div style="opacity:1;" class="card shadow mb-4"><div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary">'+getImageName(url)+'<a target="_blank" href="label_create_anno.html?image='+getImageName(url)+'&username='+username+'">'+'</h6></div><div class="card-body"> <img src="'+url+'" alt="Cinque Terre" width="100%" ></a>'+'<div class="mb-1 small">'+(count-2)+'/5 <p class="inlineBTN sideRight">Coin : '+coin+'</p></div><div class="progress progress-sm mb-2"><div class="progress-bar" role="progressbar" style="width: '+(count-2)*20+'%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>'+'</a></div></div>';
+														
+													}else{
+
+														div_old.innerHTML +=  '<div style="opacity:0.3;" class="card shadow mb-4"><div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary">'+getImageName(url)+'<a target="_blank" href="#">'+'</h6></div><div class="card-body"> <img src="'+url+'" alt="Cinque Terre" width="100%" ></a>'+'<div class="mb-1 small">'+count+'/5 <p class="inlineBTN sideRight">Coin : '+coin+'</p></div><div class="progress progress-sm mb-2"><div class="progress-bar" role="progressbar" style="width: '+count*20+'%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>'+'</a></div></div>';
+
+													}
+
+												});
+											}else{
+												// ถ้ามีคนทำแล้วมากกว่าหรือเท่ากับ 5 คน ให้แสดงเป็น opacity 0.3
+												
+
+
+													if (img.includes(getImageName(url))){
+														div_old.innerHTML +=  '<div style="opacity:0.3;" class="card shadow mb-4"><div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary">'+getImageName(url)+'<a target="_blank" href="#">'+'</h6></div><div class="card-body"> <img src="'+url+'" alt="Cinque Terre" width="100%" ></a>'+'<div class="mb-1 small">'+count+'/5 <p class="inlineBTN sideRight">Coin : '+coin+'</p></div><div class="progress progress-sm mb-2"><div class="progress-bar" role="progressbar" style="width: '+count*20+'%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>'+'</a></div></div>';
+													}else{
+
+
+														div_new.innerHTML +=  '<div style="opacity:1;" class="card shadow mb-4"><div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary">'+getImageName(url)+'<a target="_blank" href="label_create_anno.html?image='+getImageName(url)+'&username='+username+'">'+'</h6></div><div class="card-body"> <img src="'+url+'" alt="Cinque Terre" width="100%" ></a>'+'<div class="mb-1 small">'+(count-2)+'/5 <p class="inlineBTN sideRight">Coin : '+coin+'</p></div><div class="progress progress-sm mb-2"><div class="progress-bar" role="progressbar" style="width: '+(count-2)*20+'%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>'+'</a></div></div>';
+
+													}
+
+												
+
+
+
+											}
+										});
+
+
+})
+
+}).catch(function(error) {
+	console.log(error);
+});
+}
+}
+
+</script>
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+<script>
+	var firebaseConfig = {
+		apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+		authDomain: "labeljpn.firebaseapp.com",
+		databaseURL: "https://labeljpn.firebaseio.com",
+		projectId: "labeljpn",
+		storageBucket: "labeljpn.appspot.com",
+		messagingSenderId: "478979409533",
+		appId: "1:478979409533:web:a286086924054873c6d314",
+		measurementId: "G-74RV1SGSWC"
+	};
+	firebase.initializeApp(firebaseConfig);
+</script>
+
+
+
+</html>

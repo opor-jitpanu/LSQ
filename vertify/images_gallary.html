@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<style>
+		div.gallery {
+			margin: 5px;
+			border: 1px solid #ccc;
+			float: left;
+			width: 180px;
+		}
+
+		div.gallery:hover {
+			border: 1px solid #777;
+		}
+
+		div.gallery img {
+			width: 100%;
+			height: auto;
+		}
+
+		div.desc {
+			padding: 15px;
+			text-align: center;
+		}
+	</style>
+
+
+</head>
+<body>
+
+	<div id="imageGallary">
+	</div>
+
+</body>
+
+
+<script type="text/javascript">
+	window.onload = function() {
+		sessionStorage.clear();
+
+		var i;
+		for (i = 1; i < 11; i++) {
+			var name = '';
+			if (i.toString().length == '1') {
+				name  = "img_0000" + i.toString();
+			}else if (i.toString().length == '2') {
+				name  = "img_000" + i.toString();
+			}else if (i.toString().length == '3') {
+				name  = "img_00" + i.toString();
+			}else if (i.toString().length == '4') {
+				name  = "img_0" + i.toString();
+			}else{
+				name = 'img_'+i.toString();
+			}
+
+
+
+			var storageRef = firebase.storage().ref("images");
+			console.log(name);
+			storageRef.child(name+".jpg").getDownloadURL().then(function(url) {
+
+				console.log(url);
+
+
+				var img_name = url.substring(
+					url.lastIndexOf("F") + 1, 
+					url.lastIndexOf(".jpg")
+					);
+
+
+				var div = document.getElementById('imageGallary');
+				div.innerHTML += '<div class="gallery"><a target="_blank" href="index.html?view=edit&id=0&image='+img_name+'"><img src="'+url+'" alt="Cinque Terre" width="600" height="400"></a><div class="desc">'+img_name+'</div></div>';
+				
+			}).catch(function(error) {
+
+			});
+
+
+
+
+
+
+
+
+
+
+		}
+	};
+</script>
+
+
+
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+<script>
+	var firebaseConfig = {
+		apiKey: "AIzaSyBA8_iJYJUTB81W6y41kBbAFUhETKXdn38",
+		authDomain: "labeljpn.firebaseapp.com",
+		databaseURL: "https://labeljpn.firebaseio.com",
+		projectId: "labeljpn",
+		storageBucket: "labeljpn.appspot.com",
+		messagingSenderId: "478979409533",
+		appId: "1:478979409533:web:a286086924054873c6d314",
+		measurementId: "G-74RV1SGSWC"
+	};
+	firebase.initializeApp(firebaseConfig);
+</script>
+
+
+
+
+</html>
